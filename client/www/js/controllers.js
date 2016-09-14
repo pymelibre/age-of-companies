@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
+.controller('AppCtrl', function($scope, $http, $ionicModal, $timeout) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -33,24 +33,42 @@ angular.module('starter.controllers', [])
   $scope.doLogin = function() {
     console.log('Doing login', $scope.loginData);
 
-    // Simulate a login delay. Remove this and replace with your login
-    // code if using a login system
-    $timeout(function() {
+    var link = '/login';
+
+    var payload = {
+      "usr" : $scope.loginData.username,
+      "psw" : $scope.loginData.password,
+      "version":"1",
+      "gcm":""
+    }
+
+    $http.post(link, payload).then(function (res){
+      var token = res.data.tkn;
+      window.localStorage.setItem('token', token);
+      $scope.response = res.data;
       $scope.closeLogin();
-    }, 1000);
+    });
+
   };
 })
 
 .controller('PlaylistsCtrl', function($scope) {
   $scope.playlists = [
-    { title: 'Reggae', id: 1 },
-    { title: 'Chill', id: 2 },
-    { title: 'Dubstep', id: 3 },
-    { title: 'Indie', id: 4 },
-    { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
+    { title: 'Reggae', id: 1 }
   ];
 })
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
+})
+
+.controller('GeoLocationCtrl', function($scope) {
+  function wea(position) {
+    $scope.position = {
+      latitude: position.coords.latitude,
+      longitude: position.coords.longitude
+    };
+  }
+
+  navigator.geolocation.getCurrentPosition(wea, wea);
+
 });

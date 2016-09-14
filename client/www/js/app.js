@@ -114,6 +114,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     }
   })
 
+
   .state('app.inout', {
     url: '/inout',
     views: {
@@ -121,7 +122,18 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         templateUrl: 'templates/inout/index.html'
       }
     }
+  })
+
+  .state('app.inout_success', {
+    url: '/inout/success',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/inout/success.html',
+        controller: 'GeoLocationCtrl'
+      }
+    }
   });
+
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/options');
 });

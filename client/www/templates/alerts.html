@@ -2,54 +2,8 @@
 
   <ion-content>
     <div class="list">
-      <label class="item item-input item-select">
-        <div class="input-label">
-          Cliente
-        </div>
-        <select>
-          <option>Blue</option>
-          <option selected>Green</option>
-          <option>Red</option>
-        </select>
-      </label>
 
-      <label class="item item-input item-select">
-        <div class="input-label">
-          Cadena
-        </div>
-        <select>
-          <option>Blue</option>
-          <option selected>Green</option>
-          <option>Red</option>
-        </select>
-      </label>
-
-      <label class="item item-input item-select">
-        <div class="input-label">
-          Local
-        </div>
-        <select>
-          <option>Blue</option>
-          <option selected>Green</option>
-          <option>Red</option>
-        </select>
-      </label>
-
-      <!-- <label class="item item-input item-select">
-        <div class="input-label">
-          Categoria
-        </div>
-        <select>
-          <option>Blue</option>
-          <option selected>Green</option>
-          <option>Red</option>
-        </select>
-      </label> -->
-
-      <!-- <ion-list>
-        <ion-radio ng-model="choice" ng-value="'A'">Choose A</ion-radio>
-        <ion-radio ng-model="choice" ng-value="'B'">Choose B</ion-radio>
-      </ion-list> -->
+      <div ng-include="'templates/components/companyfilter.html'"></div>
 
       <div class="item item-divider">
 
