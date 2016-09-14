@@ -32,11 +32,11 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     controller: 'AppCtrl'
   })
 
-  .state('app.search', {
-    url: '/search',
+  .state('app.alerts', {
+    url: '/alerts',
     views: {
       'menuContent': {
-        templateUrl: 'templates/search.html'
+        templateUrl: 'templates/alerts.html'
       }
     }
   })
@@ -58,6 +58,15 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
       }
     })
+    .state('app.options', {
+      url: '/options',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/options.html',
+          controller: 'PlaylistsCtrl'
+        }
+      }
+    })
 
   .state('app.single', {
     url: '/playlists/:playlistId',
@@ -67,7 +76,52 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         controller: 'PlaylistCtrl'
       }
     }
+  })
+
+  .state('app.ipos', {
+    url: '/ipos',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/ipos/index.html'
+      }
+    }
+  })
+
+  .state('app.ipos_prices', {
+    url: '/ipos/prices',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/ipos/prices.html'
+      }
+    }
+  })
+
+  .state('app.ipos_presence', {
+    url: '/ipos/presence',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/ipos/presence.html'
+      }
+    }
+  })
+
+  .state('app.ipos_share', {
+    url: '/ipos/share',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/ipos/share.html'
+      }
+    }
+  })
+
+  .state('app.inout', {
+    url: '/inout',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/inout/index.html'
+      }
+    }
   });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/playlists');
+  $urlRouterProvider.otherwise('/app/options');
 });
