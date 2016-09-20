@@ -19,10 +19,9 @@
           Tipo
         </div>
         <select>
-          <option>Precio</option>
-          <option selected>Acciones competencia</option>
-          <option>Quiebre</option>
-          <option>Novedades</option>
+          <option ng-repeat="alerttype in alerttypes">
+            {{alerttype.name}}
+          </option>
         </select>
       </label>
 

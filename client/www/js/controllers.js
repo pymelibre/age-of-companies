@@ -52,10 +52,21 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('PlaylistsCtrl', function($scope) {
+.controller('PlaylistsCtrl', function($scope, alerttypeService) {
   $scope.playlists = [
     { title: 'Reggae', id: 1 }
   ];
+})
+
+.controller('AlertsController', function($scope, alerttypeService) {
+  var result = alerttypeService.getAlertTypes().then(function(response){
+    // console.log(response);
+    $scope.alerttypes = response.data;
+    return response;
+  }, function(error){
+    //something went wrong!
+    //Optionally, we can just: return error;
+  });
 })
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
