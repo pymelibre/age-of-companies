@@ -3,11 +3,22 @@
   <ion-content>
     <div class="list">
 
-      <div ng-include="'templates/components/companyfilter.html'"></div>
+      <label class="item item-input item-select" ng-repeat="outype in organizationalunittypes">
+        <div class="input-label">
+          {{outype.attributes.name}}
+        </div>
+        <select>
+          <option ng-repeat="outypedata in outype.relationships.unit.data">
+            {{outypedata.id}}
+          </option>
+        </select>
+      </label>
 
-      <div class="item item-divider">
+      <div class="item item-divider"></div>
 
-      </div>
+      <!-- <div ng-include="'templates/components/companyfilter.html'"></div> -->
+
+      <!-- <div class="item item-divider"></div> -->
 
       <label class="item item-input item-stacked-label">
         <span class="input-label">Comentario</span>
@@ -20,7 +31,7 @@
         </div>
         <select>
           <option ng-repeat="alerttype in alerttypes">
-            {{alerttype.name}}
+            {{alerttype.attributes.name}}
           </option>
         </select>
       </label>

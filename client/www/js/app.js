@@ -156,4 +156,21 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 		}
 	}
 
+})
+.factory('organizationalunittypesService', function($http) {
+  var users = [];
+
+	return {
+		getOrganizationalUnitTypes: function(){
+			return $http.get("/api/organizationalunittypes/").then(function(response){
+				return response;
+			});
+		},
+		getOrganizationalUnitType: function(index){
+      return $http.get("/api/organizationalunittypes/"+index).then(function(response){
+				return response;
+			});
+		}
+	}
+
 });
