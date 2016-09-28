@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers'])
+angular.module('starter', ['ionic', 'angularMoment', 'starter.controllers'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -25,7 +25,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 
-    .state('app', {
+  .state('app', {
     url: '/app',
     abstract: true,
     templateUrl: 'templates/menu.html',
@@ -43,31 +43,31 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   })
 
   .state('app.browse', {
-      url: '/browse',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/browse.html'
-        }
+    url: '/browse',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/browse.html'
       }
-    })
-    .state('app.playlists', {
-      url: '/playlists',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/playlists.html',
-          controller: 'PlaylistsCtrl'
-        }
+    }
+  })
+  .state('app.playlists', {
+    url: '/playlists',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/playlists.html',
+        controller: 'PlaylistsCtrl'
       }
-    })
-    .state('app.options', {
-      url: '/options',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/options.html',
-          controller: 'PlaylistsCtrl'
-        }
+    }
+  })
+  .state('app.options', {
+    url: '/options',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/options.html',
+        controller: 'PlaylistsCtrl'
       }
-    })
+    }
+  })
 
   .state('app.single', {
     url: '/playlists/:playlistId',
@@ -125,12 +125,42 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     }
   })
 
-  .state('app.inout_success', {
-    url: '/inout/success',
+  // .state('app.inout_success', {
+  //   url: '/inout/success',
+  //   views: {
+  //     'menuContent': {
+  //       templateUrl: 'templates/inout/success.html',
+  //       controller: 'GeoLocationCtrl'
+  //     }
+  //   }
+  // })
+
+  .state('app.inout_checkin', {
+    url: '/inout/checkin',
     views: {
       'menuContent': {
-        templateUrl: 'templates/inout/success.html',
-        controller: 'GeoLocationCtrl'
+        templateUrl: 'templates/inout/checkin.html',
+        controller: 'CheckinController'
+      }
+    }
+  })
+
+  .state('app.inout_checkout', {
+    url: '/inout/checkout',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/inout/checkout.html',
+        controller: 'CheckoutController'
+      }
+    }
+  })
+
+  .state('app.inout_history', {
+    url: '/inout/history',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/inout/history.html',
+        controller: 'historyController'
       }
     }
   });
@@ -143,34 +173,88 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 .factory('alerttypeService', function($http) {
   var users = [];
 
-	return {
-		getAlertTypes: function(){
-			return $http.get("/api/alerttypes/").then(function(response){
-				return response;
-			});
-		},
-		getAlertType: function(index){
+  return {
+    getAlertTypes: function(){
+      return $http.get("/api/alerttypes/").then(function(response){
+        return response;
+      });
+    },
+    getAlertType: function(index){
       return $http.get("/api/alerttypes/"+index).then(function(response){
-				return response;
-			});
-		}
-	}
-
+        return response;
+      });
+    }
+  }
 })
+
+.factory('checkinService', function($http) {
+  // console.log($http.defaults.headers);
+  $http.defaults.headers.common['Accept'] = "application/json, text/plain, */*, application/vnd.api+json";
+  $http.defaults.headers.post['Content-Type'] = "application/vnd.api+json;charset=utf-8";
+  return {
+    create: function(){
+      var payload = {
+        "data": {
+          "type": "Checkin",
+          "attributes": {
+            "checkin_type": "1",
+            "user": "1"
+          }
+        }
+      };
+      return $http.post("/api/checkins/", payload).then(function(response){
+        return response;
+      });
+    }
+  }
+})
+
+.factory('checkoutService', function($http) {
+  // console.log($http.defaults.headers);
+  $http.defaults.headers.common['Accept'] = "application/json, text/plain, */*, application/vnd.api+json";
+  $http.defaults.headers.post['Content-Type'] = "application/vnd.api+json;charset=utf-8";
+  return {
+    create: function(){
+      var payload = {
+        "data": {
+          "type": "Checkin",
+          "attributes": {
+            "checkin_type": "2",
+            "user": "1"
+          }
+        }
+      };
+      return $http.post("/api/checkins/", payload).then(function(response){
+        return response;
+      });
+    }
+  }
+})
+
+.factory('historyService', function($http) {
+  return {
+    list: function(){
+      return $http.get("/api/checkins/").then(function(response){
+        return response;
+      });
+    }
+  }
+})
+
 .factory('organizationalunittypesService', function($http) {
   var users = [];
 
-	return {
-		getOrganizationalUnitTypes: function(){
-			return $http.get("/api/organizationalunittypes/").then(function(response){
-				return response;
-			});
-		},
-		getOrganizationalUnitType: function(index){
+  return {
+    getOrganizationalUnitTypes: function(){
+      return $http.get("/api/organizationalunittypes/").then(function(response){
+        return response;
+      });
+    },
+    getOrganizationalUnitType: function(index){
       return $http.get("/api/organizationalunittypes/"+index).then(function(response){
-				return response;
-			});
-		}
-	}
+        return response;
+      });
+    }
+  }
 
 });

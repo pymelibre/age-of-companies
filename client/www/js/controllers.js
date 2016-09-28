@@ -58,6 +58,40 @@ angular.module('starter.controllers', [])
   ];
 })
 
+.controller('CheckinController', function($scope, checkinService) {
+  var result = checkinService.create().then(function(response){
+    // return response;
+    console.log(response);
+    $scope.datetime = response.data.data.attributes.created_at;
+  }, function(error){
+    //something went wrong!
+    //Optionally, we can just: return error;
+  });
+})
+
+.controller('CheckoutController', function($scope, checkoutService) {
+  var result = checkoutService.create().then(function(response){
+    // return response;
+    console.log(response);
+    $scope.datetime = response.data.data.attributes.created_at;
+  }, function(error){
+    //something went wrong!
+    //Optionally, we can just: return error;
+  });
+})
+
+.controller('historyController', function($scope, historyService) {
+  // console.log("wea");
+  var result = historyService.list().then(function(response){
+    // return response;
+    console.log(response);
+    $scope.checkins = response.data.data;
+  }, function(error){
+    //something went wrong!
+    //Optionally, we can just: return error;
+  });
+})
+
 .controller('AlertsController', function($scope, alerttypeService, organizationalunittypesService) {
   var result = alerttypeService.getAlertTypes().then(function(response){
     // return response;
@@ -86,6 +120,6 @@ angular.module('starter.controllers', [])
     };
   }
 
-  navigator.geolocation.getCurrentPosition(wea, wea);
+  // navigator.geolocation.getCurrentPosition(wea, wea);
 
 });

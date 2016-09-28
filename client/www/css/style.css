@@ -1,1 +1,13 @@
 /* Empty. Add your own CSS if you like */
+.success{
+  margin-top: 2rem;
+}
+
+.success .title{
+  text-align: center;
+}
+
+.success .details li{
+  text-align: center;
+  color: gray;
+}

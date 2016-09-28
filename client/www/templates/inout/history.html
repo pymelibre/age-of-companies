@@ -1,0 +1,12 @@
+<ion-view view-title="Presencias">
+  <ion-content>
+    <ul class="list">
+      <li class="item" ng-repeat="checkin in checkins">
+        {{ checkin.relationships.checkin_type.data.id }}
+        ->
+        {{ checkin.attributes.created_at | amDateFormat:'DD-MMM-YYYY HH:mm:ss'}}
+      </li>
+    </ul>
+
+  </ion-content>
+</ion-view>
