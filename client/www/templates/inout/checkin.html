@@ -2,11 +2,17 @@
   <ion-content>
     <div class="success">
       <h1 class="title">
-        Éxito
+        <i class="ion-checkmark-circled"></i>
       </h1>
       <ul class="details">
         <li>
           {{ datetime | amDateFormat:'DD-MMM-YYYY HH:mm:ss' }}
+        </li>
+        <li>
+          {{ position.latitude }}
+        </li>
+        <li>
+          {{ position.longitude }}
         </li>
       </ul>
     </div>

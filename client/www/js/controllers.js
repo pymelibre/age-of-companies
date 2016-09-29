@@ -58,7 +58,23 @@ angular.module('starter.controllers', [])
   ];
 })
 
-.controller('CheckinController', function($scope, checkinService) {
+.controller('CheckinController', function($scope, $cordovaGeolocation, checkinService) {
+
+  var posOptions = {timeout: 10000, enableHighAccuracy: false};
+  $cordovaGeolocation
+  .getCurrentPosition(posOptions)
+  .then(function (position) {
+    var lat  = position.coords.latitude
+    var long = position.coords.longitude
+    // alert(lat + " --- " + long);
+    $scope.position = {
+      latitude: position.coords.latitude,
+      longitude: position.coords.longitude
+    };
+  }, function(err) {
+    // error
+  });
+
   var result = checkinService.create().then(function(response){
     // return response;
     console.log(response);
@@ -69,7 +85,22 @@ angular.module('starter.controllers', [])
   });
 })
 
-.controller('CheckoutController', function($scope, checkoutService) {
+.controller('CheckoutController', function($scope, $cordovaGeolocation, checkoutService) {
+  var posOptions = {timeout: 10000, enableHighAccuracy: false};
+  $cordovaGeolocation
+  .getCurrentPosition(posOptions)
+  .then(function (position) {
+    var lat  = position.coords.latitude
+    var long = position.coords.longitude
+    // alert(lat + " --- " + long);
+    $scope.position = {
+      latitude: position.coords.latitude,
+      longitude: position.coords.longitude
+    };
+  }, function(err) {
+    // error
+  });
+
   var result = checkoutService.create().then(function(response){
     // return response;
     console.log(response);
@@ -120,6 +151,6 @@ angular.module('starter.controllers', [])
     };
   }
 
-  // navigator.geolocation.getCurrentPosition(wea, wea);
+  navigator.geolocation.getCurrentPosition(wea, wea);
 
 });
