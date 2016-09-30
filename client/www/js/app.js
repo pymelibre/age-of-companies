@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'ngCordova', 'angularMoment', 'starter.controllers'])
+angular.module('starter', ['ionic', 'ngCordova', 'angularMoment', 'starter.controllers', 'alerts.controllers', 'presence.controllers'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -50,31 +50,12 @@ angular.module('starter', ['ionic', 'ngCordova', 'angularMoment', 'starter.contr
       }
     }
   })
-  .state('app.playlists', {
-    url: '/playlists',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/playlists.html',
-        controller: 'PlaylistsCtrl'
-      }
-    }
-  })
+
   .state('app.options', {
     url: '/options',
     views: {
       'menuContent': {
-        templateUrl: 'templates/options.html',
-        controller: 'PlaylistsCtrl'
-      }
-    }
-  })
-
-  .state('app.single', {
-    url: '/playlists/:playlistId',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/playlist.html',
-        controller: 'PlaylistCtrl'
+        templateUrl: 'templates/options.html'
       }
     }
   })
@@ -124,16 +105,6 @@ angular.module('starter', ['ionic', 'ngCordova', 'angularMoment', 'starter.contr
       }
     }
   })
-
-  // .state('app.inout_success', {
-  //   url: '/inout/success',
-  //   views: {
-  //     'menuContent': {
-  //       templateUrl: 'templates/inout/success.html',
-  //       controller: 'GeoLocationCtrl'
-  //     }
-  //   }
-  // })
 
   .state('app.inout_checkin', {
     url: '/inout/checkin',
