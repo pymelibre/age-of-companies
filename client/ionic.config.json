@@ -11,6 +11,10 @@
       "proxyUrl": "http://localhost:8002/api/organizationalunittypes/"
     },
     {
+      "path": "/api/places/",
+      "proxyUrl": "http://localhost:8003/api/places/"
+    },
+    {
       "path": "/api/checkins/",
       "proxyUrl": "http://localhost:8003/api/checkins/"
     }
