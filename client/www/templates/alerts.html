@@ -1,29 +1,11 @@
 <ion-view view-title="Alertas">
-
   <ion-content>
     <div class="list">
 
-      <label class="item item-input item-select" ng-repeat="outype in organizationalunittypes">
-        <div class="input-label">
-          {{outype.attributes.name}}
-        </div>
-        <select>
-          <option ng-repeat="outypedata in outype.relationships.units.data">
-            {{outypedata.id}}
-          </option>
-        </select>
-      </label>
+      <div ng-include="'templates/components/companyfilter.html'"></div>
 
-      <div class="item item-divider"></div>
-
-      <!-- <div ng-include="'templates/components/companyfilter.html'"></div> -->
-
-      <!-- <div class="item item-divider"></div> -->
-
-      <label class="item item-input item-stacked-label">
-        <span class="input-label">Comentario</span>
-        <input type="text" placeholder="comentario">
-      </label>
+      <div class="item item-divider">
+      </div>
 
       <label class="item item-input item-select">
         <div class="input-label">
@@ -36,39 +18,20 @@
         </select>
       </label>
 
-    <!-- </div>
-
-    <div class="list"> -->
-
-      <!-- <div class="item item-thumbnail-left">
-        <img src="https://s3.amazonaws.com/static.caloriecount.about.com/images/medium/mm-peanut-mms-183995.jpg">
-        <h2>
-          Producto
-        </h2>
-        <label class="item item-input" style="max-width: 50%; float: left;">
-          <input type="text" placeholder="Precio" size="3">
-        </label>
-
-        <span class="item-note">
-          <span style="line-height: 34px;font-size: 10px;float: left;">
-            OFERTA
-          </span>
-          <label class="toggle">
-            <input type="checkbox">
-            <div class="track">
-              <div class="handle"></div>
-            </div>
-          </label>
-        </span>
-      </div> -->
-
-      <div class="item">
-        <button class="button button-stable button-full">
-          Guardar
-        </button>
-      </div>
-
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Comentario</span>
+        <input type="text" placeholder="comentario">
+      </label>
+      
     </div>
 
-</ion-content>
+  </ion-content>
+
+  <div class="tabs tabs-icon-left">
+    <a class="tab-item">
+      <i class="icon ion-archive"></i>
+      Guardar
+    </a>
+  </div>
+
 </ion-view>

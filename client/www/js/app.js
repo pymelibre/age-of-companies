@@ -96,7 +96,6 @@ angular.module('starter', ['ionic', 'ngCordova', 'angularMoment', 'starter.contr
     }
   })
 
-
   .state('app.inout', {
     url: '/inout',
     views: {
@@ -110,7 +109,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'angularMoment', 'starter.contr
     url: '/inout/checkin',
     views: {
       'menuContent': {
-        templateUrl: 'templates/inout/checkin.html',
+        templateUrl: 'templates/inout/select.html',
         controller: 'CheckinController'
       }
     }
@@ -158,6 +157,30 @@ angular.module('starter', ['ionic', 'ngCordova', 'angularMoment', 'starter.contr
   }
 })
 
+.factory('placesService', function($http) {
+  $http.defaults.headers.common['Accept'] = "application/json, text/plain, */*, application/vnd.api+json";
+  $http.defaults.headers.post['Content-Type'] = "application/vnd.api+json;charset=utf-8";
+  return {
+    create: function(latitude, longitude){
+      var payload = {
+        "data": {
+          "type": "Place",
+          "id": null,
+          "attributes": {
+            "address": "",
+            "latitude": latitude,
+            "longitude": longitude
+          }
+        }
+      };
+
+      return $http.post("/api/places/", payload).then(function(response){
+        return response;
+      });
+    }
+  }
+})
+
 .factory('checkinService', function($http) {
   // console.log($http.defaults.headers);
   $http.defaults.headers.common['Accept'] = "application/json, text/plain, */*, application/vnd.api+json";
@@ -185,13 +208,14 @@ angular.module('starter', ['ionic', 'ngCordova', 'angularMoment', 'starter.contr
   $http.defaults.headers.common['Accept'] = "application/json, text/plain, */*, application/vnd.api+json";
   $http.defaults.headers.post['Content-Type'] = "application/vnd.api+json;charset=utf-8";
   return {
-    create: function(){
+    create: function(place_id){
       var payload = {
         "data": {
           "type": "Checkin",
           "attributes": {
             "checkin_type": "2",
-            "user": "1"
+            "user": "1",
+            "place": place_id
           }
         }
       };

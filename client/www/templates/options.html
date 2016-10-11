@@ -1,17 +1,56 @@
 <ion-view view-title="Inicio">
   <ion-content>
     <ion-list>
-      <!-- <ion-item ng-repeat="playlist in playlists" href="#/app/playlists/{{playlist.id}}">
-        {{playlist.title}}
-      </ion-item> -->
-      <ion-item href="#/app/ipos">
-        <i class="icon ion-ios-home"></i>
-        iPos
+      <div class="item item-divider">
+        Auditoria de productos
+      </div>
+
+      <ion-item href="#/app/ipos/prices">
+        <i class="icon ion-arrow-right-a"></i>
+        Precios
       </ion-item>
-      <ion-item href="#/app/inout">
-        <i class="icon ion-arrow-swap"></i>
-        InOut
+
+      <ion-item href="#/app/ipos/presence">
+        <i class="icon ion-arrow-right-a"></i>
+        Presencia
       </ion-item>
-    </ion-list>
-  </ion-content>
+
+      <ion-item href="#/app/ipos/share">
+        <i class="icon ion-arrow-right-a"></i>
+        Share
+      </ion-item>
+
+      <!-- <ion-item href="#/app/ipos">
+      <i class="icon ion-ios-home"></i>
+      iPos
+    </ion-item> -->
+
+    <!-- <ion-item href="#/app/inout">
+    <i class="icon ion-arrow-swap"></i>
+    InOut
+  </ion-item> -->
+
+  <div class="item item-divider">
+    Estrategia
+  </div>
+  <ion-item href="#/app/alerts">
+    <i class="ion ion-alert-circled"></i>
+    Alertas
+  </ion-item>
+</ion-list>
+
+
+</ion-content>
+
+<div class="tabs tabs-icon-left">
+  <a class="tab-item" href="#/app/inout/checkin">
+    <i class="icon ion-log-in"></i>
+    Checkin
+  </a>
+  <a class="tab-item" href="#/app/inout/checkout">
+    <i class="icon ion-log-out"></i>
+    Checkout
+  </a>
+</div>
+
 </ion-view>
