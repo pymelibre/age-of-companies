@@ -9,48 +9,6 @@ angular.module('starter.controllers', [])
   //$scope.$on('$ionicView.enter', function(e) {
   //});
 
-  // Form data for the login modal
-  $scope.loginData = {};
-
-  // Create the login modal that we will use later
-  $ionicModal.fromTemplateUrl('templates/login.html', {
-    scope: $scope
-  }).then(function(modal) {
-    $scope.modal = modal;
-  });
-
-  // Triggered in the login modal to close it
-  $scope.closeLogin = function() {
-    $scope.modal.hide();
-  };
-
-  // Open the login modal
-  $scope.login = function() {
-    $scope.modal.show();
-  };
-
-  // Perform the login action when the user submits the login form
-  $scope.doLogin = function() {
-    console.log('Doing login', $scope.loginData);
-
-    var link = '/login';
-
-    var payload = {
-      "usr" : $scope.loginData.username,
-      "psw" : $scope.loginData.password,
-      "version":"1",
-      "gcm":""
-    }
-
-    $http.post(link, payload).then(function (res){
-      var token = res.data.tkn;
-      window.localStorage.setItem('token', token);
-      $scope.response = res.data;
-      $scope.closeLogin();
-    });
-
-  };
-
   $scope.logout = function(){
     authService.logout();
     // $state.go($state.current, {}, {reload: true});

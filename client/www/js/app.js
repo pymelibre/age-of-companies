@@ -163,7 +163,7 @@ function config($stateProvider, $urlRouterProvider, lockProvider, jwtOptionsProv
     url: '/login',
     views: {
       'menuContent': {
-        templateUrl: 'templates/newlogin.html'
+        templateUrl: 'templates/login.html'
       }
     }
   })

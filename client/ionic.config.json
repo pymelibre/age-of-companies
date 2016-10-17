@@ -3,10 +3,6 @@
   "app_id": "b1b5927e",
   "proxies": [
     {
-      "path": "/login",
-      "proxyUrl": "http://newapimarsdulces.bmanager360.com/login"
-    },
-    {
       "path": "/api/alerttypes",
       "proxyUrl": "http://localhost:8001/api/alerttypes/"
     },
