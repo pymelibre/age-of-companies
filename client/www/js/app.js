@@ -276,6 +276,14 @@ function config($stateProvider, $urlRouterProvider, lockProvider, jwtOptionsProv
           scope: 'openid',
           device: 'Mobile device'
         }
+      },
+      languageDictionary: {
+        title: "Client APP"
+      },
+      theme: {
+        // labeledSubmitButton: false,
+        // logo: "https://example.com/assets/logo.png",
+        primaryColor: "black"
       }
     }
   });
@@ -316,5 +324,5 @@ function run($ionicPlatform, $rootScope, authService) {
   });
 
   // Check is the user authenticated before Ionic platform is ready
-    authService.checkAuthOnRefresh();
+  authService.checkAuthOnRefresh();
 }
