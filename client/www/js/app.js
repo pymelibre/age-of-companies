@@ -196,15 +196,6 @@ function config($stateProvider, $urlRouterProvider, lockProvider, jwtOptionsProv
     }
   })
 
-  .state('app.ipos', {
-    url: '/ipos',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/ipos/index.html'
-      }
-    }
-  })
-
   .state('app.ipos_prices', {
     url: '/ipos/prices',
     views: {
@@ -228,15 +219,6 @@ function config($stateProvider, $urlRouterProvider, lockProvider, jwtOptionsProv
     views: {
       'menuContent': {
         templateUrl: 'templates/ipos/share.html'
-      }
-    }
-  })
-
-  .state('app.inout', {
-    url: '/inout',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/inout/index.html'
       }
     }
   })
