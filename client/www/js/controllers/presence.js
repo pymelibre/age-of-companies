@@ -1,32 +1,75 @@
 angular.module('presence.controllers', [])
 
-.controller('CheckinController', function($scope, $cordovaGeolocation, checkinService) {
+.controller('CheckinController', function($scope, $state,$cordovaGeolocation, checkinService, nearPlacesService) {
+  var place_id = $state.params.place_id;
 
-  var posOptions = {timeout: 10000, enableHighAccuracy: false};
-  $cordovaGeolocation
-  .getCurrentPosition(posOptions)
-  .then(function (position) {
-    var lat  = position.coords.latitude
-    var long = position.coords.longitude
-    // alert(lat + " --- " + long);
-    $scope.position = {
-      latitude: position.coords.latitude,
-      longitude: position.coords.longitude
-    };
+  function create_checkin(place_id){
+
+    return checkinService.create(place_id).then(function(response){
+
+      if(response.status == "201"){
+        // $state.go("app.options");
+      }else{
+        alert("No se pudo crear el checkin(cambiar este alert)");
+      }
+
+      var checkin = response.data.data;
+      $scope.checkin = checkin;
+      return checkin;
+
+    }, function(error){
+      //something went wrong!
+      //Optionally, we can just: return error;
+    });
+
+  }
+
+  var checkin = create_checkin();
+
+})
 
 
-  }, function(err) {
-    // error
-  });
+.controller('NearPlacesController', function($scope, $cordovaGeolocation, checkinService, nearPlacesService) {
 
-  var result = checkinService.create().then(function(response){
-    // return response;
-    console.log(response);
-    $scope.datetime = response.data.data.attributes.created_at;
-  }, function(error){
-    //something went wrong!
-    //Optionally, we can just: return error;
-  });
+  function get_current_position(){
+    var posOptions = {timeout: 10000, enableHighAccuracy: false};
+
+    return $cordovaGeolocation
+    .getCurrentPosition(posOptions)
+    .then(function (position) {
+      var lat  = position.coords.latitude
+      var long = position.coords.longitude
+
+      var position = {
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude
+      };
+
+      $scope.position = position;
+
+      return position;
+
+    }, function(err) {
+      // error
+    });
+
+  }
+
+  function find_near_places(position){
+
+    return nearPlacesService.get(position.latitude, position.longitude).then(function(response){
+      var places = response.data.data;
+      $scope.places = places;
+      return places;
+    }, function(error){
+      //something went wrong!
+      //Optionally, we can just: return error;
+    });
+
+  }
+
+  get_current_position().then(find_near_places);
+
 })
 
 .controller('CheckoutController', function($scope, $cordovaGeolocation, placesService, checkoutService) {

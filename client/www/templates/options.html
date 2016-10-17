@@ -1,4 +1,9 @@
 <ion-view view-title="Inicio">
+
+  <!-- <ion-nav-bar class="bar-stable">
+    <ion-nav-back-button></ion-nav-back-button>
+  </ion-nav-bar> -->
+
   <ion-content>
     <ion-list>
       <div class="item item-divider">
@@ -20,37 +25,32 @@
         Share
       </ion-item>
 
-      <!-- <ion-item href="#/app/ipos">
-      <i class="icon ion-ios-home"></i>
-      iPos
-    </ion-item> -->
 
-    <!-- <ion-item href="#/app/inout">
-    <i class="icon ion-arrow-swap"></i>
-    InOut
-  </ion-item> -->
+      <div class="item item-divider">
+        Estrategia
+      </div>
+      <ion-item href="#/app/alerts">
+        <i class="ion ion-alert-circled"></i>
+        Alertas
+      </ion-item>
+      <!-- <ion-item href="#/app/login">
+        <i class="ion ion-alert-circled"></i>
+        Login
+      </ion-item> -->
+    </ion-list>
 
-  <div class="item item-divider">
-    Estrategia
+
+  </ion-content>
+
+  <div class="tabs tabs-icon-left">
+    <a class="tab-item" href="#/app/inout/near">
+      <i class="icon ion-log-in"></i>
+      Checkin
+    </a>
+    <a class="tab-item" href="#/app/inout/checkout">
+      <i class="icon ion-log-out"></i>
+      Checkout
+    </a>
   </div>
-  <ion-item href="#/app/alerts">
-    <i class="ion ion-alert-circled"></i>
-    Alertas
-  </ion-item>
-</ion-list>
-
-
-</ion-content>
-
-<div class="tabs tabs-icon-left">
-  <a class="tab-item" href="#/app/inout/checkin">
-    <i class="icon ion-log-in"></i>
-    Checkin
-  </a>
-  <a class="tab-item" href="#/app/inout/checkout">
-    <i class="icon ion-log-out"></i>
-    Checkout
-  </a>
-</div>
 
 </ion-view>

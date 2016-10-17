@@ -32,6 +32,15 @@ angular.module('starter', ['ionic', 'ngCordova', 'angularMoment', 'starter.contr
     controller: 'AppCtrl'
   })
 
+  .state('app.login', {
+    url: '/login',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/newlogin.html'
+      }
+    }
+  })
+
   .state('app.alerts', {
     url: '/alerts',
     views: {
@@ -105,11 +114,21 @@ angular.module('starter', ['ionic', 'ngCordova', 'angularMoment', 'starter.contr
     }
   })
 
-  .state('app.inout_checkin', {
-    url: '/inout/checkin',
+  .state('app.inout_near', {
+    url: '/inout/near',
     views: {
       'menuContent': {
-        templateUrl: 'templates/inout/select.html',
+        templateUrl: 'templates/inout/near.html',
+        controller: 'NearPlacesController'
+      }
+    }
+  })
+
+  .state('app.inout_checkin', {
+    url: '/inout/checkin/:place_id',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/inout/checkin.html',
         controller: 'CheckinController'
       }
     }
@@ -161,20 +180,43 @@ angular.module('starter', ['ionic', 'ngCordova', 'angularMoment', 'starter.contr
   $http.defaults.headers.common['Accept'] = "application/json, text/plain, */*, application/vnd.api+json";
   $http.defaults.headers.post['Content-Type'] = "application/vnd.api+json;charset=utf-8";
   return {
-    create: function(latitude, longitude){
+    // create: function(latitude, longitude){
+    //   var payload = {
+    //     "data": {
+    //       "type": "Place",
+    //       "id": null,
+    //       "attributes": {
+    //         "address": "",
+    //         "latitude": latitude,
+    //         "longitude": longitude
+    //       }
+    //     }
+    //   };
+    //
+    //   return $http.post("/api/places/", payload).then(function(response){
+    //     return response;
+    //   });
+    // }
+  }
+})
+
+.factory('nearPlacesService', function($http) {
+  // console.log($http.defaults.headers);
+  $http.defaults.headers.common['Accept'] = "application/json, text/plain, */*, application/vnd.api+json";
+  $http.defaults.headers.post['Content-Type'] = "application/vnd.api+json;charset=utf-8";
+  return {
+    get: function(latitude, longitude){
       var payload = {
         "data": {
-          "type": "Place",
+          "type": "NearPlacesViewSet",
           "id": null,
           "attributes": {
-            "address": "",
             "latitude": latitude,
             "longitude": longitude
           }
         }
       };
-
-      return $http.post("/api/places/", payload).then(function(response){
+      return $http.post("/api/near/", payload).then(function(response){
         return response;
       });
     }
@@ -186,13 +228,14 @@ angular.module('starter', ['ionic', 'ngCordova', 'angularMoment', 'starter.contr
   $http.defaults.headers.common['Accept'] = "application/json, text/plain, */*, application/vnd.api+json";
   $http.defaults.headers.post['Content-Type'] = "application/vnd.api+json;charset=utf-8";
   return {
-    create: function(){
+    create: function(place_id){
       var payload = {
         "data": {
           "type": "Checkin",
+          "id": null,
           "attributes": {
-            "checkin_type": "1",
-            "user": "1"
+            "user": "1",
+            "place": "2"
           }
         }
       };

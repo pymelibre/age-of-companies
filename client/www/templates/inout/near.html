@@ -1,0 +1,12 @@
+<ion-view view-title="Seleccione lugar">
+  <ion-content>
+    <ion-list>
+
+      <ion-item ng-repeat="place in places" href="#/app/inout/checkin/{{place.id}}">
+        <i class="icon ion-ios-location"></i>
+        {{place.attributes.address}}
+      </ion-item>
+
+    </ion-list>
+  </ion-content>
+</ion-view>
