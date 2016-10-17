@@ -4,159 +4,9 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'ngCordova', 'angularMoment', 'starter.controllers', 'alerts.controllers', 'presence.controllers'])
-
-.run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
-    if (window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-      cordova.plugins.Keyboard.disableScroll(true);
-
-    }
-    if (window.StatusBar) {
-      // org.apache.cordova.statusbar required
-      StatusBar.styleDefault();
-    }
-  });
-})
-
-.config(function($stateProvider, $urlRouterProvider) {
-  $stateProvider
-
-  .state('app', {
-    url: '/app',
-    abstract: true,
-    templateUrl: 'templates/menu.html',
-    controller: 'AppCtrl'
-  })
-
-  .state('app.login', {
-    url: '/login',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/newlogin.html'
-      }
-    }
-  })
-
-  .state('app.alerts', {
-    url: '/alerts',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/alerts.html',
-        controller: 'AlertsController'
-      }
-    }
-  })
-
-  .state('app.browse', {
-    url: '/browse',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/browse.html'
-      }
-    }
-  })
-
-  .state('app.options', {
-    url: '/options',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/options.html'
-      }
-    }
-  })
-
-  .state('app.ipos', {
-    url: '/ipos',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/ipos/index.html'
-      }
-    }
-  })
-
-  .state('app.ipos_prices', {
-    url: '/ipos/prices',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/ipos/prices.html'
-      }
-    }
-  })
-
-  .state('app.ipos_presence', {
-    url: '/ipos/presence',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/ipos/presence.html'
-      }
-    }
-  })
-
-  .state('app.ipos_share', {
-    url: '/ipos/share',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/ipos/share.html'
-      }
-    }
-  })
-
-  .state('app.inout', {
-    url: '/inout',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/inout/index.html'
-      }
-    }
-  })
-
-  .state('app.inout_near', {
-    url: '/inout/near',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/inout/near.html',
-        controller: 'NearPlacesController'
-      }
-    }
-  })
-
-  .state('app.inout_checkin', {
-    url: '/inout/checkin/:place_id',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/inout/checkin.html',
-        controller: 'CheckinController'
-      }
-    }
-  })
-
-  .state('app.inout_checkout', {
-    url: '/inout/checkout',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/inout/checkout.html',
-        controller: 'CheckoutController'
-      }
-    }
-  })
-
-  .state('app.inout_history', {
-    url: '/inout/history',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/inout/history.html',
-        controller: 'historyController'
-      }
-    }
-  });
-
-  // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/options');
-})
+angular.module('starter', ['ionic', 'ngCordova', 'angularMoment', 'starter.controllers', 'alerts.controllers', 'presence.controllers', 'auth0.lock', 'angular-jwt'])
+.run(run)
+.config(config)
 
 // Data Factories
 .factory('alerttypeService', function($http) {
@@ -296,3 +146,193 @@ angular.module('starter', ['ionic', 'ngCordova', 'angularMoment', 'starter.contr
   }
 
 });
+
+config.$inject = ['$stateProvider', '$urlRouterProvider', 'lockProvider', 'jwtOptionsProvider'];
+
+function config($stateProvider, $urlRouterProvider, lockProvider, jwtOptionsProvider) {
+  $stateProvider
+
+  .state('app', {
+    url: '/app',
+    abstract: true,
+    templateUrl: 'templates/menu.html',
+    controller: 'AppCtrl'
+  })
+
+  .state('app.login', {
+    url: '/login',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/newlogin.html'
+      }
+    }
+  })
+
+  .state('app.alerts', {
+    url: '/alerts',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/alerts.html',
+        controller: 'AlertsController'
+      }
+    }
+  })
+
+  .state('app.browse', {
+    url: '/browse',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/browse.html'
+      }
+    }
+  })
+
+  .state('app.options', {
+    url: '/options',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/options.html'
+      }
+    }
+  })
+
+  .state('app.ipos', {
+    url: '/ipos',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/ipos/index.html'
+      }
+    }
+  })
+
+  .state('app.ipos_prices', {
+    url: '/ipos/prices',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/ipos/prices.html'
+      }
+    }
+  })
+
+  .state('app.ipos_presence', {
+    url: '/ipos/presence',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/ipos/presence.html'
+      }
+    }
+  })
+
+  .state('app.ipos_share', {
+    url: '/ipos/share',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/ipos/share.html'
+      }
+    }
+  })
+
+  .state('app.inout', {
+    url: '/inout',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/inout/index.html'
+      }
+    }
+  })
+
+  .state('app.inout_near', {
+    url: '/inout/near',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/inout/near.html',
+        controller: 'NearPlacesController'
+      }
+    }
+  })
+
+  .state('app.inout_checkin', {
+    url: '/inout/checkin/:place_id',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/inout/checkin.html',
+        controller: 'CheckinController'
+      }
+    }
+  })
+
+  .state('app.inout_checkout', {
+    url: '/inout/checkout',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/inout/checkout.html',
+        controller: 'CheckoutController'
+      }
+    }
+  })
+
+  .state('app.inout_history', {
+    url: '/inout/history',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/inout/history.html',
+        controller: 'historyController'
+      }
+    }
+  });
+
+  // if none of the above states are matched, use this as the fallback
+  $urlRouterProvider.otherwise('/app/options');
+
+  lockProvider.init({
+    clientID: window.auth0_clientID,
+    domain: window.auth0_domain,
+    options: {
+      auth: {
+        redirect: false,
+        params: {
+          scope: 'openid',
+          device: 'Mobile device'
+        }
+      }
+    }
+  });
+
+  // Configuration for angular-jwt
+  jwtOptionsProvider.config({
+    tokenGetter: function() {
+      return localStorage.getItem('id_token');
+    },
+    whiteListedDomains: ['localhost'],
+    unauthenticatedRedirectPath: '/login'
+  });
+
+}
+
+run.$inject = ['$ionicPlatform', '$rootScope', 'authService'];
+
+function run($ionicPlatform, $rootScope, authService) {
+  $ionicPlatform.ready(function() {
+    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+    // for form inputs)
+    if (window.cordova && window.cordova.plugins.Keyboard) {
+      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+      cordova.plugins.Keyboard.disableScroll(true);
+
+    }
+    if (window.StatusBar) {
+      // org.apache.cordova.statusbar required
+      StatusBar.styleDefault();
+    }
+
+    // Register the authentication listener that is
+    // set up in auth.service.js
+    authService.registerAuthenticationListener();
+
+    //This event gets triggered on URL change
+    $rootScope.$on('$locationChangeStart', authService.checkAuthOnRefresh);
+  });
+
+  // Check is the user authenticated before Ionic platform is ready
+    authService.checkAuthOnRefresh();
+}

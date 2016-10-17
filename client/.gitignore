@@ -6,3 +6,5 @@ platforms/
 plugins/
 
 .io-config.json
+
+www/js/auth0.config.js

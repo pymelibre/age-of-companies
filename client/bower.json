@@ -6,6 +6,9 @@
   },
   "dependencies": {
     "moment": "^2.15.1",
-    "angular-moment": "^0.10.3"
+    "angular-moment": "^0.10.3",
+    "auth0-lock": "^10.4.0",
+    "angular-lock": "^1.0.3",
+    "angular-jwt": "^0.1.6"
   }
 }

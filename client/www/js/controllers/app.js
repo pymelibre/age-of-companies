@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $http, $ionicModal, $timeout) {
+.controller('AppCtrl', function($scope, $state, $http, $ionicModal, $timeout, authService) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -50,4 +50,11 @@ angular.module('starter.controllers', [])
     });
 
   };
+
+  $scope.logout = function(){
+    authService.logout();
+    // $state.go($state.current, {}, {reload: true});
+    $state.go('app.options', {}, {reload: true});
+  }
+
 })
