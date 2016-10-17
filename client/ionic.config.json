@@ -15,6 +15,10 @@
       "proxyUrl": "http://localhost:8003/api/places/"
     },
     {
+      "path": "/api/near/",
+      "proxyUrl": "http://localhost:8003/api/near/"
+    },
+    {
       "path": "/api/checkins/",
       "proxyUrl": "http://localhost:8003/api/checkins/"
     }
