@@ -299,9 +299,9 @@ function config($stateProvider, $urlRouterProvider, lockProvider, jwtOptionsProv
 
 }
 
-run.$inject = ['$ionicPlatform', '$rootScope', 'authService'];
+run.$inject = ['$ionicPlatform', '$http','$rootScope', 'authService'];
 
-function run($ionicPlatform, $rootScope, authService) {
+function run($ionicPlatform, $http,$rootScope, authService) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -321,6 +321,10 @@ function run($ionicPlatform, $rootScope, authService) {
 
     //This event gets triggered on URL change
     $rootScope.$on('$locationChangeStart', authService.checkAuthOnRefresh);
+
+
+    $http.defaults.headers.common.Authorization = 'JWT '+localStorage.getItem('id_token');
+
   });
 
   // Check is the user authenticated before Ionic platform is ready
