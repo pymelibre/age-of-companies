@@ -273,7 +273,7 @@ function config($stateProvider, $urlRouterProvider, lockProvider, jwtOptionsProv
       auth: {
         redirect: false,
         params: {
-          scope: 'openid',
+          scope: 'openid app_metadata user_metadata',
           device: 'Mobile device'
         }
       },
@@ -322,8 +322,14 @@ function run($ionicPlatform, $http,$rootScope, authService) {
     //This event gets triggered on URL change
     $rootScope.$on('$locationChangeStart', authService.checkAuthOnRefresh);
 
+    // Authorization based on the token given by Auth0
+    var id_token = localStorage.getItem('id_token');
 
-    $http.defaults.headers.common.Authorization = 'JWT '+localStorage.getItem('id_token');
+    $rootScope.$on('$locationChangeStart', function(){
+      if(id_token != null){
+        $http.defaults.headers.common.Authorization = 'JWT '+id_token;
+      }
+    });
 
   });
 
