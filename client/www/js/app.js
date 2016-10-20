@@ -273,7 +273,7 @@ function config($stateProvider, $urlRouterProvider, lockProvider, jwtOptionsProv
       auth: {
         redirect: false,
         params: {
-          scope: 'openid app_metadata user_metadata',
+          scope: window.auth0_scope,
           device: 'Mobile device'
         }
       },

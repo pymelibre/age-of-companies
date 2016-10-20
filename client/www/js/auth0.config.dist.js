@@ -3,3 +3,4 @@
 
 window.auth0_clientID = 'client_id';
 window.auth0_domain = 'client_domain';
+window.auth0_scope = 'openid app_metadata user_metadata';
