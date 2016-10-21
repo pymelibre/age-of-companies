@@ -15,7 +15,7 @@
       <div class="list"> -->
 
       <!-- <div class="item"> -->
-      <div class="item item-thumbnail-left">
+      <!-- <div class="item item-thumbnail-left">
         <img src="https://s3.amazonaws.com/static.caloriecount.about.com/images/medium/mm-peanut-mms-183995.jpg">
         <h2>
           Producto
@@ -35,7 +35,18 @@
             </div>
           </label>
         </span>
-      </div>
+      </div> -->
+
+      <ion-item class="item item-thumbnail-left" ng-repeat="product in products">
+        <img src="https://s3.amazonaws.com/static.caloriecount.about.com/images/medium/mm-peanut-mms-183995.jpg">
+        <h2>
+          {{product.attributes.created_at}}
+        </h2>
+        <label class="item item-input" style="max-width: 50%; float: left;">
+          <input type="text" placeholder="Precio" size="3">
+        </label>
+      </ion-item>
+
     </div>
   </ion-content>
 

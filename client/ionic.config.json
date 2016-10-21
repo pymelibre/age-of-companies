@@ -21,6 +21,20 @@
     {
       "path": "/api/checkins/",
       "proxyUrl": "http://localhost:8003/api/checkins/"
+    },
+    {
+      "path": "/api/products/",
+      "proxyUrl": "http://localhost:8004/api/products/"
+    },
+    {
+      "path": "/api/productinstances/",
+      "proxyUrl": "http://localhost:8004/api/productinstances/"
+    },
+    {
+      "path": "/api/productsdatas/",
+      "proxyUrl": "http://localhost:8004/api/productsdatas/"
     }
+
+
   ]
 }

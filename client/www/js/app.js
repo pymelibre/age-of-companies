@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'ngCordova', 'angularMoment', 'starter.controllers', 'alerts.controllers', 'presence.controllers', 'auth0.lock', 'angular-jwt'])
+angular.module('starter', ['ionic', 'ngCordova', 'angularMoment', 'starter.controllers', 'alerts.controllers', 'presence.controllers', 'products.controllers', 'auth0.lock', 'angular-jwt'])
 .run(run)
 .config(config)
 
@@ -129,6 +129,38 @@ angular.module('starter', ['ionic', 'ngCordova', 'angularMoment', 'starter.contr
   }
 })
 
+.factory('productsService', function($http) {
+  // console.log($http.defaults.headers);
+  $http.defaults.headers.common['Accept'] = "application/json, text/plain, */*, application/vnd.api+json";
+  $http.defaults.headers.post['Content-Type'] = "application/vnd.api+json;charset=utf-8";
+  return {
+
+    list: function(){
+      return $http.get("/api/productsdatas/").then(function(response){
+        return response;
+      });
+    }
+
+    // list: function(){
+    //   var payload = {
+    //     "data": {
+    //       "type": "NearPlacesViewSet",
+    //       "id": null,
+    //       "attributes": {
+    //         "latitude": latitude,
+    //         "longitude": longitude
+    //       }
+    //     }
+    //   };
+    //   return $http.post("/api/near/", payload).then(function(response){
+    //     return response;
+    //   });
+    // }
+  }
+})
+
+
+
 .factory('organizationalunittypesService', function($http) {
   var users = [];
 
@@ -200,7 +232,8 @@ function config($stateProvider, $urlRouterProvider, lockProvider, jwtOptionsProv
     url: '/ipos/prices',
     views: {
       'menuContent': {
-        templateUrl: 'templates/ipos/prices.html'
+        templateUrl: 'templates/ipos/prices.html',
+        controller: 'ProductsController'
       }
     }
   })
