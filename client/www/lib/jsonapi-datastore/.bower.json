@@ -1,0 +1,40 @@
+{
+  "name": "jsonapi-datastore",
+  "version": "0.4.0-beta",
+  "homepage": "https://github.com/beauby/jsonapi-datastore",
+  "authors": [
+    "Lucas Hosseini <lucas.hosseini@gmail.com>"
+  ],
+  "description": "JavaScript client-side JSON API data handling made easy.",
+  "main": "dist/jsonapi-datastore.js",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "JSON",
+    "parsing",
+    "serializing",
+    "datastore",
+    "JSONAPI"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "src",
+    "bower_components",
+    "test"
+  ],
+  "devDependencies": {
+    "mocha": "~2.2.5",
+    "chai": "~3.2.0"
+  },
+  "_release": "0.4.0-beta",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.4.0-beta",
+    "commit": "56512d7be9b424cbd0da0a71acbed65eab14e042"
+  },
+  "_source": "https://github.com/beauby/jsonapi-datastore.git",
+  "_target": "^0.4.0-beta",
+  "_originalSource": "jsonapi-datastore"
+}
