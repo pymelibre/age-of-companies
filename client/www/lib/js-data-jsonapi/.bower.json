@@ -1,0 +1,50 @@
+{
+  "name": "js-data-jsonapi",
+  "description": "JsonApi adapter for js-data.",
+  "main": "./dist/js-data-jsonapi.js",
+  "homepage": "https://github.com/blairallegrotech/js-data-jsonapi",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/blairallegrotech/js-data-jsonapi.git"
+  },
+  "author": {
+    "name": "Blair Jacobs"
+  },
+  "license": "MIT",
+  "ignore": [
+    ".idea/",
+    ".*",
+    "*.iml",
+    "src/",
+    "scripts/",
+    "lib/",
+    "doc/",
+    "guide/",
+    "coverage/",
+    "Gruntfile.js",
+    "node_modules/",
+    "test/",
+    "obj/",
+    "ts-built/",
+    "examples/",
+    "package.json",
+    "tsconfig.json",
+    "tslint.json",
+    "karma.conf.js",
+    "karma.start.js"
+  ],
+  "dependencies": {
+    "js-data": "^2.8.2 <3",
+    "js-data-http": "^2.1.2 <3"
+  },
+  "version": "0.0.0-alpha.19",
+  "_release": "0.0.0-alpha.19",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.0.0-alpha.19",
+    "commit": "95ca31dc0894f5968f376c373705bd54f2468097"
+  },
+  "_source": "https://github.com/BlairAllegroTech/js-data-jsonapi.git",
+  "_target": "^0.0.0-alpha.19",
+  "_originalSource": "js-data-jsonapi"
+}
