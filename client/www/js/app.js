@@ -307,7 +307,7 @@ function config($stateProvider, $urlRouterProvider, lockProvider, jwtOptionsProv
     url: '/app',
     abstract: true,
     templateUrl: 'templates/menu.html',
-    controller: 'AppCtrl'
+    controller: 'AppController'
   })
 
   .state('app.login', {
@@ -325,15 +325,6 @@ function config($stateProvider, $urlRouterProvider, lockProvider, jwtOptionsProv
       'menuContent': {
         templateUrl: 'templates/alerts.html',
         controller: 'AlertsController'
-      }
-    }
-  })
-
-  .state('app.browse', {
-    url: '/browse',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/browse.html'
       }
     }
   })
@@ -361,7 +352,8 @@ function config($stateProvider, $urlRouterProvider, lockProvider, jwtOptionsProv
     url: '/ipos/presence',
     views: {
       'menuContent': {
-        templateUrl: 'templates/ipos/presence.html'
+        templateUrl: 'templates/ipos/presence.html',
+        controller: 'ProductsController'
       }
     }
   })
@@ -370,7 +362,8 @@ function config($stateProvider, $urlRouterProvider, lockProvider, jwtOptionsProv
     url: '/ipos/share',
     views: {
       'menuContent': {
-        templateUrl: 'templates/ipos/share.html'
+        templateUrl: 'templates/ipos/share.html',
+        controller: 'ProductsController'
       }
     }
   })

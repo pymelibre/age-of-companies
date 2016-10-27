@@ -1,57 +1,116 @@
 <ion-view view-title="Presencia">
+  <div ng-controller="ProductsController">
+    <form novalidate class="simple-form">
+      <ion-content>
+        <div class="list">
+          <div ng-include="'templates/components/companyfilter.html'"></div>
 
-  <ion-content>
-    <div class="list">
-      <div ng-include="'templates/components/companyfilter.html'"></div>
+          <div class="item item-divider"></div>
 
-      <div class="item item-divider">
+          <div ng-include="'templates/components/productfilter.html'"></div>
+
+          <div class="item item-divider"></div>
+
+
+          <ion-item class="item item-thumbnail-left" ng-repeat="pi in provision.product_instances | byCategoryId:this ">
+            <img src="{{pi.product.image}}">
+            <h2>
+              {{pi.name}}
+            </h2>
+            <label class="item item-input item-select">
+              <div id="_label-0" aria-label="
+              Estado
+              " class="input-label">
+              Estado
+            </div>
+            <select ng-model="product[$index].status">
+              <option value="none" selected="">
+                -Seleccione-
+              </option>
+              <option value="Disponible">
+                Disponible
+              </option>
+              <option value="Ajuste">
+                OOS - Ajuste
+              </option>
+              <option value="Green">
+                OOS - Maestra
+              </option>
+              <option value="Green">
+                OOS - Abastecimiento
+              </option>
+            </select>
+          </label>
+
+        </ion-item>
+
+        <div ng-include="'templates/components/productsdebuger.html'"></div>
+
       </div>
 
-      <div ng-include="'templates/components/productfilter.html'"></div>
+    </ion-content>
 
-      <div class="item item-divider"></div>
-
-      <div class="item item-thumbnail-left">
-        <img src="https://s3.amazonaws.com/static.caloriecount.about.com/images/medium/mm-peanut-mms-183995.jpg">
-        <h2>
-          Producto
-        </h2>
-        <label class="item item-input item-select">
-          <div id="_label-0" aria-label="
-          Estado
-          " class="input-label">
-          Estado
-        </div>
-        <select>
-          <option value="none" selected="">
-
-          </option>
-          <option value="Disponible">
-            Disponible
-          </option>
-          <option value="Ajuste">
-            OOS - Ajuste
-          </option>
-          <option value="Green">
-            OOS - Maestra
-          </option>
-          <option value="Green">
-            OOS - Abastecimiento
-          </option>
-        </select>
-      </label>
-
+    <div class="tabs tabs-icon-left">
+      <a class="tab-item" ng-click="update(product)">
+        <i class="icon ion-archive"></i>
+        Guardar
+      </a>
     </div>
-
-  </div>
-
-</ion-content>
-
-<div class="tabs tabs-icon-left">
-  <a class="tab-item">
-    <i class="icon ion-archive"></i>
-    Guardar
-  </a>
+  </form>
 </div>
+
+<!-- <ion-content>
+<div class="list">
+<div ng-include="'templates/components/companyfilter.html'"></div>
+
+<div class="item item-divider">
+</div>
+
+<div ng-include="'templates/components/productfilter.html'"></div>
+
+<div class="item item-divider"></div>
+
+<div class="item item-thumbnail-left">
+<img src="https://s3.amazonaws.com/static.caloriecount.about.com/images/medium/mm-peanut-mms-183995.jpg">
+<h2>
+Producto
+</h2>
+<label class="item item-input item-select">
+<div id="_label-0" aria-label="
+Estado
+" class="input-label">
+Estado
+</div>
+<select>
+<option value="none" selected="">
+
+</option>
+<option value="Disponible">
+Disponible
+</option>
+<option value="Ajuste">
+OOS - Ajuste
+</option>
+<option value="Green">
+OOS - Maestra
+</option>
+<option value="Green">
+OOS - Abastecimiento
+</option>
+</select>
+</label>
+
+</div>
+
+</div>
+
+</ion-content> -->
+
+<!-- <div class="tabs tabs-icon-left">
+<a class="tab-item">
+<i class="icon ion-archive"></i>
+Guardar
+</a>
+</div> -->
 
 </ion-view>
