@@ -23,18 +23,32 @@
       "proxyUrl": "http://localhost:8003/api/checkins/"
     },
     {
+      "path": "/api/brands/",
+      "proxyUrl": "http://localhost:8004/api/brands/"
+    },
+    {
+      "path": "/api/categories/",
+      "proxyUrl": "http://localhost:8004/api/categories/"
+    },
+    {
       "path": "/api/products/",
       "proxyUrl": "http://localhost:8004/api/products/"
     },
     {
-      "path": "/api/productinstances/",
-      "proxyUrl": "http://localhost:8004/api/productinstances/"
+      "path": "/api/productsinstances/",
+      "proxyUrl": "http://localhost:8004/api/productsinstances/"
+    },
+    {
+      "path": "/api/provisions/",
+      "proxyUrl": "http://localhost:8004/api/provisions/"
+    },
+    {
+      "path": "/api/productstatus/",
+      "proxyUrl": "http://localhost:8004/api/productstatus/"
     },
     {
       "path": "/api/productsdatas/",
       "proxyUrl": "http://localhost:8004/api/productsdatas/"
     }
-
-
   ]
 }
