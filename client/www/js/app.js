@@ -4,9 +4,27 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'ngCordova', 'angularMoment', 'starter.controllers', 'alerts.controllers', 'presence.controllers', 'products.controllers', 'auth0.lock', 'angular-jwt'])
+angular.module('starter', ['ionic', 'ngCordova', 'angularMoment', 'starter.controllers', 'alerts.controllers', 'presence.controllers', 'products.controllers', 'auth0.lock', 'angular-jwt','beauby.jsonApiDataStore', 'js-data'])
 .run(run)
 .config(config)
+
+//Category Filter
+.filter('byCategoryId', function() {
+  return function(products, scope) {
+    products = products || [];
+    var out = [];
+
+    if(scope.category){
+      angular.forEach(products, function(product, index) {
+        if(product.category.id == scope.category){
+          this.push(product);
+        }
+      }, out);
+    }
+
+    return out;
+  };
+})
 
 // Data Factories
 .factory('alerttypeService', function($http) {
@@ -132,8 +150,26 @@ angular.module('starter', ['ionic', 'ngCordova', 'angularMoment', 'starter.contr
 .factory('productsService', function($http) {
   // console.log($http.defaults.headers);
   $http.defaults.headers.common['Accept'] = "application/json, text/plain, */*, application/vnd.api+json";
-  $http.defaults.headers.post['Content-Type'] = "application/vnd.api+json;charset=utf-8";
+  $http.defaults.headers.common['Content-Type'] = "application/vnd.api+json;charset=utf-8";
+  // $http.defaults.headers.common['Access-Control-Allow-Origin'] = "*";
   return {
+    listProvisions: function(){
+      return $http.get("/api/provisions/").then(function(response){
+        return response;
+      });
+    },
+    listInstances: function(){
+      return $http.get("/api/productsinstances/").then(function(response){
+        return response;
+      });
+    },
+    getInstance: function(instance_id){
+      var url = "/api/productsinstances/"+instance_id+"/";
+
+      return $http.get(url).then(function(response){
+        return response;
+      });
+    },
 
     list: function(){
       return $http.get("/api/productsdatas/").then(function(response){
@@ -177,7 +213,90 @@ angular.module('starter', ['ionic', 'ngCordova', 'angularMoment', 'starter.contr
     }
   }
 
-});
+})
+
+.factory('Brand', function(DS) {
+  return DS.defineResource({
+    name:'brand',
+    endpoint:'/api/brands/'
+  });
+})
+
+.factory('Category', function(DS) {
+  return DS.defineResource({
+    name:'category',
+    endpoint:'/api/categories/'
+  });
+})
+
+.factory('Product', function(DS) {
+  return DS.defineResource({
+    name:'product',
+    endpoint:'/api/products/',
+    belongsTo: {
+      brand: {
+        // localField is for linking relations
+        // user.profile -> profile of the user
+        localField: 'brand',
+        // foreignKey is the "join" field
+        // the name of the field on a profile that points to its parent user
+        foreignKey: 'brandId'
+      },
+      category: {
+        // localField is for linking relations
+        // user.profile -> profile of the user
+        localField: 'category',
+        // foreignKey is the "join" field
+        // the name of the field on a profile that points to its parent user
+        foreignKey: 'categoryId'
+      }
+    }
+  });
+})
+
+.factory('Client', function(DS) {
+  return DS.defineResource({
+    name:'client',
+    endpoint:'/api/clients/'
+  });
+})
+
+.factory('ProductInstance', function(DS) {
+  return DS.defineResource({
+    name:'productinstance',
+    endpoint:'/api/productsinstances/'
+  });
+})
+
+.factory('Local', function(DS) {
+  return DS.defineResource({
+    name:'local',
+    endpoint:'/api/locals/'
+  });
+})
+
+.factory('Provision', function(DS) {
+  return DS.defineResource({
+    name:'provision',
+    endpoint:'/api/provisions/'
+  });
+})
+
+.factory('ProductStatus', function(DS) {
+  return DS.defineResource({
+    name:'productstatus',
+    endpoint:'/api/productstatus/'
+  });
+})
+
+.factory('ProductData', function(DS) {
+  return DS.defineResource({
+    name:'productdata',
+    endpoint:'/api/productsdatas/'
+  });
+})
+
+;
 
 config.$inject = ['$stateProvider', '$urlRouterProvider', 'lockProvider', 'jwtOptionsProvider'];
 
