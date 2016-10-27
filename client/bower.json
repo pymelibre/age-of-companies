@@ -10,6 +10,13 @@
     "auth0-lock": "^10.4.0",
     "angular-lock": "^1.0.3",
     "angular-jwt": "^0.1.6",
-    "jsonapi-datastore": "^0.4.0-beta"
+    "jsonapi-datastore": "^0.4.0-beta",
+    "js-data-angular": "^3.2.1",
+    "js-data": "^2.10.0",
+    "js-data-jsonapi": "^0.0.0-alpha.19"
+  },
+  "resolutions": {
+    "moment": "^2.15.1",
+    "angular": ">=1.1.0"
   }
 }
