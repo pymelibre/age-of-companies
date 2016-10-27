@@ -2,9 +2,8 @@
   <div class="input-label">
     Categoria
   </div>
-  <select>
-    <option selected>Lacteos</option>
-    <option>Higiene</option>
-    <option>Oficina</option>
+  <select ng-model="category" ng-change="setCategory(category)">
+    <option value="">-Seleccione-</option>
+    <option ng-repeat="category in categories" value="{{category.id}}">{{category.name}}</option>
   </select>
 </label>
