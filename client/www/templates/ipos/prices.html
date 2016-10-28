@@ -18,11 +18,11 @@
               {{pi.name}}
             </h2>
             <label class="item item-input" style="max-width: 50%; float: left;">
-              <input type="text" placeholder="Precio" ng-model="product[$index].price" /><br />
+              <input type="text" placeholder="Precio" ng-model="product[pi.id].price" /><br />
             </label>
 
             <label class="item item-select" style="padding: 22px; height: 47px;">
-              <select ng-model="product[$index].price_type">
+              <select ng-model="product[pi.id].price_type">
                 <option value="">-Seleccione-</option>
                 <option ng-repeat="status in productStatus" value="{{status.id}}">{{status.name}}</option>
               </select>

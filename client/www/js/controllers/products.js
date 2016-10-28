@@ -28,7 +28,7 @@ angular.module('products.controllers', [])
     $scope.provision = provisions[0];
 
     angular.forEach($scope.provision.product_instances, function(pi, index){
-      $scope.product[index] = {"id":pi.id};
+      $scope.product[pi.id] = {"id":pi.id};
     });
 
   });
