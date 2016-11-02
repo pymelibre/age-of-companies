@@ -27,6 +27,10 @@
       "proxyUrl": "http://localhost:8003/api/checkins/"
     },
     {
+      "path": "/api/checkouts/",
+      "proxyUrl": "http://localhost:8003/api/checkouts/"
+    },
+    {
       "path": "/api/brands/",
       "proxyUrl": "http://localhost:8004/api/brands/"
     },

@@ -6,8 +6,9 @@
       </h1>
       <ul class="details">
         <li>
-          {{ datetime | amDateFormat:'DD-MMM-YYYY HH:mm:ss' }}
+          {{ checkout.created_at | amDateFormat:'DD-MMM-YYYY HH:mm:ss' }}
         </li>
+
         <li>
           {{ address }}
         </li>
@@ -17,6 +18,7 @@
         <li>
           {{ position.longitude }}
         </li>
+
       </ul>
     </div>
 

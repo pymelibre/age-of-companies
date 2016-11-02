@@ -30,7 +30,7 @@ angular.module('starter', ['ionic', 'ionic-toast', 'ngCordova', 'angularMoment',
 
 .factory('placesService', function($http) {
   $http.defaults.headers.common['Accept'] = "application/json, text/plain, */*, application/vnd.api+json";
-  $http.defaults.headers.post['Content-Type'] = "application/vnd.api+json;charset=utf-8";
+  $http.defaults.headers.post['Content-Type'] = "application/json;charset=utf-8";
   return {
     // create: function(latitude, longitude){
     //   var payload = {
@@ -55,18 +55,14 @@ angular.module('starter', ['ionic', 'ionic-toast', 'ngCordova', 'angularMoment',
 .factory('nearPlacesService', function($http) {
   // console.log($http.defaults.headers);
   $http.defaults.headers.common['Accept'] = "application/json, text/plain, */*, application/vnd.api+json";
-  $http.defaults.headers.post['Content-Type'] = "application/vnd.api+json;charset=utf-8";
+  $http.defaults.headers.post['Content-Type'] = "application/json;charset=utf-8";
   return {
     get: function(latitude, longitude){
       var payload = {
-        "data": {
-          "type": "NearPlacesViewSet",
-          "id": null,
-          "attributes": {
-            "latitude": latitude,
-            "longitude": longitude
-          }
-        }
+        "type": "NearPlacesViewSet",
+        "id": null,
+        "latitude": latitude,
+        "longitude": longitude
       };
       return $http.post("/api/near/", payload).then(function(response){
         return response;
@@ -75,33 +71,11 @@ angular.module('starter', ['ionic', 'ionic-toast', 'ngCordova', 'angularMoment',
   }
 })
 
-.factory('checkinService', function($http) {
-  // console.log($http.defaults.headers);
-  $http.defaults.headers.common['Accept'] = "application/json, text/plain, */*, application/vnd.api+json";
-  $http.defaults.headers.post['Content-Type'] = "application/vnd.api+json;charset=utf-8";
-  return {
-    create: function(place_id){
-      var payload = {
-        "data": {
-          "type": "Checkin",
-          "id": null,
-          "attributes": {
-            "user": "1",
-            "place": "2"
-          }
-        }
-      };
-      return $http.post("/api/checkins/", payload).then(function(response){
-        return response;
-      });
-    }
-  }
-})
 
 .factory('checkoutService', function($http) {
   // console.log($http.defaults.headers);
   $http.defaults.headers.common['Accept'] = "application/json, text/plain, */*, application/vnd.api+json";
-  $http.defaults.headers.post['Content-Type'] = "application/vnd.api+json;charset=utf-8";
+  $http.defaults.headers.post['Content-Type'] = "application/json;charset=utf-8";
   return {
     create: function(place_id){
       var payload = {
@@ -216,6 +190,27 @@ angular.module('starter', ['ionic', 'ionic-toast', 'ngCordova', 'angularMoment',
   });
 })
 
+.factory('Checkin', function(DS) {
+  return DS.defineResource({
+    name:'checkin',
+    endpoint:'/api/checkins/'
+  });
+})
+
+.factory('Checkout', function(DS) {
+  return DS.defineResource({
+    name:'checkout',
+    endpoint:'/api/checkouts/'
+  });
+})
+
+// .factory('ProductData', function(DS) {
+//   return DS.defineResource({
+//     name:'productdata',
+//     endpoint:'/api/productsdatas/'
+//   });
+// })
+
 ;
 
 config.$inject = ['$stateProvider', '$urlRouterProvider', 'lockProvider', 'jwtOptionsProvider'];
@@ -314,16 +309,6 @@ function config($stateProvider, $urlRouterProvider, lockProvider, jwtOptionsProv
       'menuContent': {
         templateUrl: 'templates/inout/checkout.html',
         controller: 'CheckoutController'
-      }
-    }
-  })
-
-  .state('app.inout_history', {
-    url: '/inout/history',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/inout/history.html',
-        controller: 'historyController'
       }
     }
   });
