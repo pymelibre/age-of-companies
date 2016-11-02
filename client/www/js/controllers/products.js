@@ -1,6 +1,6 @@
 angular.module('products.controllers', [])
 
-.controller('ProductsController', function($scope, productsService, JsonApiDataStore, Brand, Provision, ProductInstance, Product, Category, ProductStatus) {
+.controller('ProductsController', function($scope, JsonApiDataStore, Brand, Provision, ProductInstance, Product, Category, ProductStatus) {
   $scope.master = {};
 
   $scope.update = function(product) {
