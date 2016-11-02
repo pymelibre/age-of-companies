@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'ngCordova', 'angularMoment', 'starter.controllers', 'alerts.controllers', 'presence.controllers', 'products.controllers', 'auth0.lock', 'angular-jwt','beauby.jsonApiDataStore', 'js-data'])
+angular.module('starter', ['ionic', 'ionic-toast', 'ngCordova', 'angularMoment', 'starter.controllers', 'alerts.controllers', 'presence.controllers', 'products.controllers', 'auth0.lock', 'angular-jwt','beauby.jsonApiDataStore', 'js-data'])
 .run(run)
 .config(config)
 
@@ -27,22 +27,6 @@ angular.module('starter', ['ionic', 'ngCordova', 'angularMoment', 'starter.contr
 })
 
 // Data Factories
-.factory('alerttypeService', function($http) {
-  var users = [];
-
-  return {
-    getAlertTypes: function(){
-      return $http.get("/api/alerttypes/").then(function(response){
-        return response;
-      });
-    },
-    getAlertType: function(index){
-      return $http.get("/api/alerttypes/"+index).then(function(response){
-        return response;
-      });
-    }
-  }
-})
 
 .factory('placesService', function($http) {
   $http.defaults.headers.common['Accept'] = "application/json, text/plain, */*, application/vnd.api+json";
@@ -213,6 +197,20 @@ angular.module('starter', ['ionic', 'ngCordova', 'angularMoment', 'starter.contr
     }
   }
 
+})
+
+.factory('AlertType', function(DS) {
+  return DS.defineResource({
+    name:'alerttype',
+    endpoint:'/api/alerttypes/'
+  });
+})
+
+.factory('Alert', function(DS) {
+  return DS.defineResource({
+    name:'alert',
+    endpoint:'/api/alerts/'
+  });
 })
 
 .factory('Brand', function(DS) {

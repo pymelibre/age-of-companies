@@ -7,6 +7,10 @@
       "proxyUrl": "http://localhost:8001/api/alerttypes/"
     },
     {
+      "path": "/api/alerts",
+      "proxyUrl": "http://localhost:8001/api/alerts/"
+    },
+    {
       "path": "/api/organizationalunittypes/",
       "proxyUrl": "http://localhost:8002/api/organizationalunittypes/"
     },

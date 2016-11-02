@@ -11,24 +11,31 @@
         <div class="input-label">
           Tipo
         </div>
-        <select>
-          <option ng-repeat="alerttype in alerttypes">
-            {{alerttype.attributes.name}}
-          </option>
+        <select ng-model="alert.type">
+          <option ng-repeat="alerttype in alerttypes" value="{{alerttype.id}}">{{alerttype.name}}</option>
         </select>
       </label>
 
       <label class="item item-input item-stacked-label">
         <span class="input-label">Comentario</span>
-        <input type="text" placeholder="comentario">
+        <input type="text" placeholder="comentario" ng-model="alert.message">
       </label>
-      
+
     </div>
+
+    <ion-item>
+      <pre>Master: {{master | json }}</pre>
+    </ion-item>
+
+    <ion-item>
+      <pre>Alert: {{alert | json }}</pre>
+    </ion-item>
 
   </ion-content>
 
   <div class="tabs tabs-icon-left">
-    <a class="tab-item">
+    <!-- <a class="tab-item" ng-click="update(alert)"> -->
+    <a class="tab-item" ng-click="createAlert(alert)">
       <i class="icon ion-archive"></i>
       Guardar
     </a>
