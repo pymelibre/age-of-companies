@@ -1,6 +1,6 @@
 angular.module('presence.controllers', [])
 
-.controller('CheckinController', function($scope, $state,$cordovaGeolocation, nearPlacesService, Checkin) {
+.controller('CheckinController', function($scope, $state, $cordovaGeolocation, nearPlacesService, Checkin) {
   var place_id = $state.params.place_id;
 
   var payload = {
@@ -14,6 +14,9 @@ angular.module('presence.controllers', [])
     console.log("created checkin");
     console.log(checkin);
     $scope.checkin = checkin;
+
+    localStorage.setItem("current_place_id",checkin.place);
+    $state.go('app.options');
   });
 
 })
