@@ -190,6 +190,27 @@ angular.module('starter', ['ionic', 'ionic-toast', 'ngCordova', 'angularMoment',
   });
 })
 
+.factory('PriceData', function(DS) {
+  return DS.defineResource({
+    name:'pricedata',
+    endpoint:'/api/pricedatas/'
+  });
+})
+
+.factory('PresenceData', function(DS) {
+  return DS.defineResource({
+    name:'presencedata',
+    endpoint:'/api/presencedatas/'
+  });
+})
+
+.factory('ShareData', function(DS) {
+  return DS.defineResource({
+    name:'sharedata',
+    endpoint:'/api/sharedatas/'
+  });
+})
+
 .factory('Checkin', function(DS) {
   return DS.defineResource({
     name:'checkin',
