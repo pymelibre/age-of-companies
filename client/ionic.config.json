@@ -57,6 +57,18 @@
     {
       "path": "/api/productsdatas/",
       "proxyUrl": "http://localhost:8004/api/productsdatas/"
+    },
+    {
+      "path": "/api/pricedatas/",
+      "proxyUrl": "http://localhost:8004/api/pricedatas/"
+    },
+    {
+      "path": "/api/presencedatas/",
+      "proxyUrl": "http://localhost:8004/api/presencedatas/"
+    },
+    {
+      "path": "/api/sharedatas/",
+      "proxyUrl": "http://localhost:8004/api/sharedatas/"
     }
   ]
 }
