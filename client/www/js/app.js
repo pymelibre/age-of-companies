@@ -304,7 +304,7 @@ function config($stateProvider, $urlRouterProvider, lockProvider, jwtOptionsProv
   })
 
   .state('app.inout_checkout', {
-    url: '/inout/checkout',
+    url: '/inout/checkout/:place_id',
     views: {
       'menuContent': {
         templateUrl: 'templates/inout/checkout.html',

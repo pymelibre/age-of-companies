@@ -22,8 +22,9 @@ angular.module('products.controllers', [])
     }
   }
 
-  Provision.findAll().then(function (provisions) {
-    // console.log(provisions);
+  Provision.findAll({ place: 2 }, { useFilter: true }).then(function (provisions) {
+    console.log("Provisions");
+    console.log(provisions);
     $scope.provisions = provisions;
     $scope.provision = provisions[0];
 
@@ -31,15 +32,15 @@ angular.module('products.controllers', [])
       $scope.product[pi.id] = {"id":pi.id};
     });
 
+  }, function(error){
+    console.log(error);
   });
 
   ProductStatus.findAll().then(function (productStatus) {
-    // console.log(provisions);
     $scope.productStatus = productStatus;
   });
 
   Category.findAll().then(function (categories) {
-    // console.log(provisions);
     $scope.categories = categories;
   });
 

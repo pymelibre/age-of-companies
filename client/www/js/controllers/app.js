@@ -26,7 +26,6 @@ angular.module('starter.controllers', [])
     if(place_id){
       $rootScope.place_id = place_id;
     }else{
-
       // $ionicHistory.nextViewOptions({
       //   disableAnimate: true,
       //   disableBack: true
@@ -39,7 +38,7 @@ angular.module('starter.controllers', [])
 
   validate_place_id();
 
-  $rootScope.$on('$stateChangeEnd', validate_place_id);
+  $rootScope.$on('$stateChangeStart', validate_place_id);
 
 
 })

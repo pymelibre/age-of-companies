@@ -21,9 +21,8 @@ angular.module('presence.controllers', [])
 
 })
 
-.controller('CheckoutController', function($scope, $state,$cordovaGeolocation, nearPlacesService, Checkout) {
+.controller('CheckoutController', function($scope, $state, $cordovaGeolocation, nearPlacesService, Checkout) {
   var place_id = $state.params.place_id;
-  // TODO: Replace the place_id with a working variable
 
   var payload = {
     "type": "Checkout",
@@ -36,6 +35,13 @@ angular.module('presence.controllers', [])
     console.log("created checkout");
     console.log(checkout);
     $scope.checkout = checkout;
+
+    if(place_id == checkout.place){
+      console.log("removing localstorage.current_place_id");
+      localStorage.removeItem("current_place_id");
+      $state.go('app.options');
+    }
+
   });
 
 })
