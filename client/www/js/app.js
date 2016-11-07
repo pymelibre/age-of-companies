@@ -225,13 +225,6 @@ angular.module('starter', ['ionic', 'ionic-toast', 'ngCordova', 'angularMoment',
   });
 })
 
-// .factory('ProductData', function(DS) {
-//   return DS.defineResource({
-//     name:'productdata',
-//     endpoint:'/api/productsdatas/'
-//   });
-// })
-
 ;
 
 config.$inject = ['$stateProvider', '$urlRouterProvider', 'lockProvider', 'jwtOptionsProvider'];
