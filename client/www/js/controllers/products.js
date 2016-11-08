@@ -1,6 +1,6 @@
 angular.module('products.controllers', [])
 
-.controller('ProductsController', function($scope, JsonApiDataStore, Brand, Provision, ProductInstance, Product, Category, ProductStatus) {
+.controller('ProductsController', function($scope, $rootScope, JsonApiDataStore, Brand, Provision, ProductInstance, Product, Category, ProductStatus, PriceData, PresenceData, ShareData) {
   $scope.master = {};
 
   $scope.update = function(product) {
@@ -29,7 +29,7 @@ angular.module('products.controllers', [])
     $scope.provision = provisions[0];
 
     angular.forEach($scope.provision.product_instances, function(pi, index){
-      $scope.product[pi.id] = {"id":pi.id};
+      $scope.product[pi.id] = {"product_instance":pi.id};
     });
 
   }, function(error){
@@ -43,5 +43,44 @@ angular.module('products.controllers', [])
   Category.findAll().then(function (categories) {
     $scope.categories = categories;
   });
+
+
+  //funcion para guardar precio
+  $scope.savePrice = function(products){
+    // alert("save price");
+    console.log("save price");
+    console.log(products);
+    console.log(this);
+
+    angular.forEach(products, function(pi, index){
+      console.log("pi");
+
+      pi.local = $rootScope.place_id;
+      pi.provision = 2;
+
+      console.log(pi);
+
+
+      PriceData.create(pi).then(function(pricedata){
+        delete(products[index]);
+      }, function(error){
+        alert("Error");
+        console.log(error);
+      });
+
+      // if(product.category.id == scope.category){
+      //   this.push(product);
+      // }
+    }, products);
+    // }, out);
+
+    // console.log("products");
+    // console.log(products);
+  }
+
+  //funcion para guardar presencia
+
+  //funcion para guardar stock
+
 
 })

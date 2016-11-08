@@ -1,6 +1,6 @@
 <ion-view view-title="Precios">
   <div ng-controller="ProductsController">
-    <form novalidate class="simple-form">
+    <form name="priceDataForm" novalidate class="simple-form">
       <ion-content>
         <div class="list">
           <div ng-include="'templates/components/companyfilter.html'"></div>
@@ -18,7 +18,7 @@
               {{pi.name}}
             </h2>
             <label class="item item-input" style="max-width: 50%; float: left;">
-              <input type="text" placeholder="Precio" ng-model="product[pi.id].price" /><br />
+              <input name="priceField" type="number" placeholder="Precio" ng-model="product[pi.id].price" /><br />
             </label>
 
             <label class="item item-select" style="padding: 22px; height: 47px;">
@@ -30,6 +30,8 @@
 
           </ion-item>
 
+          <!-- {{priceDataForm.$error}} -->
+
           <div ng-include="'templates/components/productsdebuger.html'"></div>
 
         </div>
@@ -37,7 +39,8 @@
       </ion-content>
 
       <div class="tabs tabs-icon-left">
-        <a class="tab-item" ng-click="update(product)">
+        <!-- <a class="tab-item" ng-click="update(product)"> -->
+        <a class="tab-item" ng-click="savePrice(product)">
           <i class="icon ion-archive"></i>
           Guardar
         </a>
