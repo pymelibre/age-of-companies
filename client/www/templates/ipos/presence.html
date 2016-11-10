@@ -1,6 +1,6 @@
 <ion-view view-title="Presencia">
   <div ng-controller="ProductsController">
-    <form novalidate class="simple-form">
+    <form name="presenceDataForm" novalidate class="simple-form">
       <ion-content>
         <div class="list">
           <div ng-include="'templates/components/companyfilter.html'"></div>
@@ -17,45 +17,31 @@
             <h2>
               {{pi.name}}
             </h2>
-            <label class="item item-input item-select">
-              <div id="_label-0" aria-label="
-              Estado
-              " class="input-label">
-              Estado
-            </div>
-            <select ng-model="product[pi.id].status">
-              <option value="">
-                -Seleccione-
-              </option>
-              <option value="Disponible">
-                Disponible
-              </option>
-              <option value="Ajuste">
-                OOS - Ajuste
-              </option>
-              <option value="Green">
-                OOS - Maestra
-              </option>
-              <option value="Green">
-                OOS - Abastecimiento
-              </option>
-            </select>
+
+            <label class="item item-select" style="padding: 22px; height: 47px;">
+              <select required ng-model="product[pi.id].status">
+                <option value="">-Seleccione-</option>
+                <option ng-repeat="status in productStatus" value="{{status.id}}">{{status.name}}</option>
+              </select>
+            </label>
+
           </label>
 
         </ion-item>
 
-        <div ng-include="'templates/components/productsdebuger.html'"></div>
+        <!-- <div ng-include="'templates/components/productsdebuger.html'"></div> -->
 
       </div>
 
     </ion-content>
 
-    <div class="tabs tabs-icon-left">
-      <a class="tab-item" ng-click="update(product)">
+    <div class="tabs tabs-icon-left" ng-if="presenceDataForm.$valid">
+      <a class="tab-item" ng-click="savePresence(product)">
         <i class="icon ion-archive"></i>
         Guardar
       </a>
     </div>
+
   </form>
 </div>
 
