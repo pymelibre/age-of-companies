@@ -19,9 +19,6 @@ angular.module('alerts.controllers', [])
 
   $scope.createAlert = function(alert){
 
-    // Alert.findAll().then(function (alerts) {
-    //   console.log(alerts);
-    // });
     var payload = {
       "name":"",
       "description":alert.message,
@@ -33,6 +30,9 @@ angular.module('alerts.controllers', [])
       if(alert){
         $scope.showToast("Alerta creada");
       }
+    },function(error){
+      // $scope.showToast("Error al crear alerta"); //Message for the people
+      $scope.showToast(error.data); //Message for the pros
     });
 
   };
