@@ -55,6 +55,10 @@
       "proxyUrl": "http://localhost:8004/api/productstatus/"
     },
     {
+      "path": "/api/pricetypes/",
+      "proxyUrl": "http://localhost:8004/api/pricetypes/"
+    },
+    {
       "path": "/api/productsdatas/",
       "proxyUrl": "http://localhost:8004/api/productsdatas/"
     },
