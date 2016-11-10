@@ -109,8 +109,30 @@ angular.module('products.controllers', [])
 
   }
 
-
   //funcion para guardar stock
+  $scope.saveShare = function(products){
+
+    angular.forEach(products, function(pi, index){
+      var filtered = $filter("byCategoryId")($scope.provision.product_instances,$scope);
+
+      // Check if current pi exists in filtered provision.product_instances
+      var pi_index = findWithAttr(filtered, "id", pi.product_instance);
+
+      if(pi_index!=-1){
+        pi.local = $rootScope.place_id;
+        pi.provision = 2;
+
+        ShareData.create(pi).then(function(sharedata){
+          // delete(products[index]);
+          $scope.showToast("Creado");
+        }, function(error){
+          $scope.showToast("Error");
+        });
+      }
+
+    }, products);
+
+  }
 
   //Duplicated in alerts.js
   $scope.showToast = function(message){

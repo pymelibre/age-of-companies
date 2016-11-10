@@ -1,7 +1,7 @@
 <ion-view view-title="Share">
 
   <div ng-controller="ProductsController">
-    <form novalidate class="simple-form">
+    <form name="shareDataForm" novalidate class="simple-form">
       <ion-content>
         <div class="list">
           <div ng-include="'templates/components/companyfilter.html'"></div>
@@ -20,23 +20,28 @@
             </h2>
 
             <label class="item item-input" style="float: left;">
-              <input type="text" placeholder="Caras" size="3" ng-model="product[pi.id].shelf_share">
+              <input required type="number" placeholder="# Caras" size="3" ng-model="product[pi.id].shelf_share">
+            </label>
+
+            <label class="item item-input" style="float: left;">
+              <input required type="number" placeholder="Stock" size="3" ng-model="product[pi.id].shelf_stock">
             </label>
 
           </ion-item>
 
-          <div ng-include="'templates/components/productsdebuger.html'"></div>
+          <!-- <div ng-include="'templates/components/productsdebuger.html'"></div> -->
 
         </div>
 
       </ion-content>
 
-      <div class="tabs tabs-icon-left">
-        <a class="tab-item" ng-click="update(product)">
+      <div class="tabs tabs-icon-left" ng-if="shareDataForm.$valid">
+        <a class="tab-item" ng-click="saveShare(product)">
           <i class="icon ion-archive"></i>
           Guardar
         </a>
       </div>
+
     </form>
   </div>
 
