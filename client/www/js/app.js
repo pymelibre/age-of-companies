@@ -26,32 +26,8 @@ angular.module('starter', ['ionic', 'ionic-toast', 'ngCordova', 'angularMoment',
   };
 })
 
+
 // Data Factories
-
-.factory('placesService', function($http) {
-  $http.defaults.headers.common['Accept'] = "application/json, text/plain, */*, application/vnd.api+json";
-  $http.defaults.headers.post['Content-Type'] = "application/json;charset=utf-8";
-  return {
-    // create: function(latitude, longitude){
-    //   var payload = {
-    //     "data": {
-    //       "type": "Place",
-    //       "id": null,
-    //       "attributes": {
-    //         "address": "",
-    //         "latitude": latitude,
-    //         "longitude": longitude
-    //       }
-    //     }
-    //   };
-    //
-    //   return $http.post("/api/places/", payload).then(function(response){
-    //     return response;
-    //   });
-    // }
-  }
-})
-
 .factory('nearPlacesService', function($http) {
   // console.log($http.defaults.headers);
   $http.defaults.headers.common['Accept'] = "application/json, text/plain, */*, application/vnd.api+json";
@@ -71,29 +47,6 @@ angular.module('starter', ['ionic', 'ionic-toast', 'ngCordova', 'angularMoment',
   }
 })
 
-
-.factory('checkoutService', function($http) {
-  // console.log($http.defaults.headers);
-  $http.defaults.headers.common['Accept'] = "application/json, text/plain, */*, application/vnd.api+json";
-  $http.defaults.headers.post['Content-Type'] = "application/json;charset=utf-8";
-  return {
-    create: function(place_id){
-      var payload = {
-        "data": {
-          "type": "Checkin",
-          "attributes": {
-            "checkin_type": "2",
-            "user": "1",
-            "place": place_id
-          }
-        }
-      };
-      return $http.post("/api/checkins/", payload).then(function(response){
-        return response;
-      });
-    }
-  }
-})
 
 .factory('AlertType', function(DS) {
   return DS.defineResource({
@@ -180,6 +133,13 @@ angular.module('starter', ['ionic', 'ionic-toast', 'ngCordova', 'angularMoment',
   return DS.defineResource({
     name:'productstatus',
     endpoint:'/api/productstatus/'
+  });
+})
+
+.factory('PriceType', function(DS) {
+  return DS.defineResource({
+    name:'pricetype',
+    endpoint:'/api/pricetypes/'
   });
 })
 

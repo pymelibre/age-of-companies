@@ -1,6 +1,15 @@
 angular.module('products.controllers', [])
 
-.controller('ProductsController', function($scope, $rootScope, JsonApiDataStore, Brand, Provision, ProductInstance, Product, Category, ProductStatus, PriceData, PresenceData, ShareData) {
+.controller('ProductsController', function($scope, $rootScope, $filter, ionicToast, JsonApiDataStore, Brand, Provision, ProductInstance, Product, Category, ProductStatus, PriceType, PriceData, PresenceData, ShareData) {
+  function findWithAttr(array, attr, value) {
+    for(var i = 0; i < array.length; i += 1) {
+      if(array[i][attr] === value) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
   $scope.master = {};
 
   $scope.update = function(product) {
@@ -33,11 +42,16 @@ angular.module('products.controllers', [])
     });
 
   }, function(error){
-    console.log(error);
+    // $scope.showToast(error.data); //For regular people
+    $scope.showToast(error.data); //For the pros
   });
 
   ProductStatus.findAll().then(function (productStatus) {
     $scope.productStatus = productStatus;
+  });
+
+  PriceType.findAll().then(function (priceTypes) {
+    $scope.priceTypes = priceTypes;
   });
 
   Category.findAll().then(function (categories) {
@@ -47,40 +61,36 @@ angular.module('products.controllers', [])
 
   //funcion para guardar precio
   $scope.savePrice = function(products){
-    // alert("save price");
-    console.log("save price");
-    console.log(products);
-    console.log(this);
 
     angular.forEach(products, function(pi, index){
-      console.log("pi");
+      var filtered = $filter("byCategoryId")($scope.provision.product_instances,$scope);
 
-      pi.local = $rootScope.place_id;
-      pi.provision = 2;
+      // Check if current pi exists in filtered provision.product_instances
+      var pi_index = findWithAttr(filtered, "id", pi.product_instance);
 
-      console.log(pi);
+      if(pi_index!=-1){
+        pi.local = $rootScope.place_id;
+        pi.provision = 2;
 
+        PriceData.create(pi).then(function(pricedata){
+          // delete(products[index]);
+          $scope.showToast("Creado");
+        }, function(error){
+          $scope.showToast("Error");
+        });
+      }
 
-      PriceData.create(pi).then(function(pricedata){
-        delete(products[index]);
-      }, function(error){
-        alert("Error");
-        console.log(error);
-      });
-
-      // if(product.category.id == scope.category){
-      //   this.push(product);
-      // }
     }, products);
-    // }, out);
 
-    // console.log("products");
-    // console.log(products);
   }
 
   //funcion para guardar presencia
 
   //funcion para guardar stock
 
+  //Duplicated in alerts.js
+  $scope.showToast = function(message){
+    ionicToast.show(message, 'bottom', false, 5000);
+  };
 
 })

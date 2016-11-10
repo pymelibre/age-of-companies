@@ -18,33 +18,40 @@
               {{pi.name}}
             </h2>
             <label class="item item-input" style="max-width: 50%; float: left;">
-              <input name="priceField" type="number" placeholder="Precio" ng-model="product[pi.id].price" /><br />
+              <input required name="priceField[pi.id]" type="number" placeholder="Precio" ng-model="product[pi.id].price" /><br />
             </label>
 
             <label class="item item-select" style="padding: 22px; height: 47px;">
-              <select ng-model="product[pi.id].price_type">
+              <select required ng-model="product[pi.id].price_type">
                 <option value="">-Seleccione-</option>
-                <option ng-repeat="status in productStatus" value="{{status.id}}">{{status.name}}</option>
+                <option ng-repeat="type in priceTypes" value="{{type.id}}">{{type.name}}</option>
               </select>
             </label>
 
+
           </ion-item>
 
-          <!-- {{priceDataForm.$error}} -->
 
-          <div ng-include="'templates/components/productsdebuger.html'"></div>
+          <!-- <div ng-include="'templates/components/productsdebuger.html'"></div> -->
 
         </div>
 
       </ion-content>
 
-      <div class="tabs tabs-icon-left">
-        <!-- <a class="tab-item" ng-click="update(product)"> -->
+      <div class="tabs tabs-icon-left" ng-if="priceDataForm.$valid">
         <a class="tab-item" ng-click="savePrice(product)">
           <i class="icon ion-archive"></i>
           Guardar
         </a>
       </div>
+
+      <!-- <div class="tabs tabs-icon-left" ng-if="!priceDataForm.$valid">
+        <a class="tab-item" ng-click="alert('wea')">
+          <i class="icon ion-archive"></i>
+          Guardar
+        </a>
+      </div> -->
+
     </form>
   </div>
 </ion-view>
