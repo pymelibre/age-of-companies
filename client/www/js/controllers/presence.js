@@ -1,6 +1,6 @@
 angular.module('presence.controllers', [])
 
-.controller('CheckinController', function($scope, $state, $cordovaGeolocation, nearPlacesService, Checkin) {
+.controller('CheckinController', function($scope, $state, $cordovaGeolocation, nearPlacesService, Checkin, Place) {
   var place_id = $state.params.place_id;
 
   var payload = {
@@ -16,6 +16,17 @@ angular.module('presence.controllers', [])
     $scope.checkin = checkin;
 
     localStorage.setItem("current_place_id",checkin.place);
+
+    // console.log(Place);
+
+    Place.find(checkin.place).then(function(place){
+      localStorage.setItem("current_place", angular.toJson(place));
+      $rootScope.current_place = place;
+    }, function(error){
+      // alert("error");
+      // return null;
+    });
+
     $state.go('app.options');
   });
 
