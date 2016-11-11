@@ -171,6 +171,13 @@ angular.module('starter', ['ionic', 'ionic-toast', 'ngCordova', 'angularMoment',
   });
 })
 
+.factory('Place', function(DS) {
+  return DS.defineResource({
+    name:'place',
+    endpoint:'/api/places/'
+  });
+})
+
 .factory('Checkin', function(DS) {
   return DS.defineResource({
     name:'checkin',
