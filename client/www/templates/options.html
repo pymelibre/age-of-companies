@@ -32,27 +32,16 @@
         Alertas
       </ion-item>
 
-      <span ng-if="place_id">
-        <div class="item item-divider">
-          PRUEBAS
-        </div>
-
-        <ion-item href="#/app/alerts">
-          <i class="ion ion-alert-circled"></i>
-          {{place_id}}
-        </ion-item>
-      </span>
-
     </ion-list>
 
   </ion-content>
 
   <div class="tabs tabs-icon-left">
-    <a class="tab-item" href="#/app/inout/near">
+    <a class="tab-item" href="#/app/inout/near" ng-if="!place_id">
       <i class="icon ion-log-in"></i>
       Checkin
     </a>
-    <a class="tab-item" href="#/app/inout/checkout/{{place_id}}">
+    <a class="tab-item" href="#/app/inout/checkout/{{place_id}}" ng-if="place_id">
       <i class="icon ion-log-out"></i>
       Checkout
     </a>
