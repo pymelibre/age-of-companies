@@ -31,7 +31,7 @@ angular.module('products.controllers', [])
     }
   }
 
-  Provision.findAll({ place: 2 }, { useFilter: true }).then(function (provisions) {
+  Provision.findAll({ local: $rootScope.place_id }, { useFilter: true }).then(function (provisions) {
     console.log("Provisions");
     console.log(provisions);
     $scope.provisions = provisions;
