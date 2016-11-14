@@ -27,7 +27,7 @@ angular.module('presence.controllers', [])
       // return null;
     });
 
-    $state.go('app.options');
+    // $state.go('app.options');
   });
 
 })
@@ -50,7 +50,9 @@ angular.module('presence.controllers', [])
     if(place_id == checkout.place){
       console.log("removing localstorage.current_place_id");
       localStorage.removeItem("current_place_id");
-      $state.go('app.options');
+      localStorage.removeItem("current_place");
+      // $state.go('app.options');
+      
     }
 
   });

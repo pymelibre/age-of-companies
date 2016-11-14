@@ -17,7 +17,8 @@ angular.module('starter.controllers', [])
       disableBack: true
     });
 
-    // $state.go($state.current, {}, {reload: true});
+    localStorage.clear();
+
     $state.go('app.options');
   }
 
@@ -35,7 +36,12 @@ angular.module('starter.controllers', [])
 
   validate_place_id();
 
-  $rootScope.$on('$stateChangeStart', validate_place_id);
+  $rootScope.$on('$locationChangeStart', validate_place_id);
 
 
+})
+
+.controller('IndexController', function($scope, $rootScope, $location, $ionicHistory, $state, $http, $ionicModal, $timeout, authService) {
+  $ionicHistory.clearCache();
+  $ionicHistory.clearHistory();
 })

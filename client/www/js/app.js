@@ -229,7 +229,8 @@ function config($stateProvider, $urlRouterProvider, lockProvider, jwtOptionsProv
     url: '/options',
     views: {
       'menuContent': {
-        templateUrl: 'templates/options.html'
+        templateUrl: 'templates/options.html',
+        controller: 'IndexController'
       }
     }
   })
