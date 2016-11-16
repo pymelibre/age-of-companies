@@ -25,11 +25,16 @@ angular.module('starter.controllers', [])
   validate_place_id = function(){
     var place_id = localStorage.getItem("current_place_id");
     var place = angular.fromJson(localStorage.getItem("current_place"));
+
     if(place_id){
       $rootScope.place_id = place_id;
+    }else{
+      $rootScope.place_id = null;
     }
     if(place){
       $rootScope.current_place = place;
+    }else{
+      $rootScope.current_place = null;
     }
 
   }
@@ -37,7 +42,6 @@ angular.module('starter.controllers', [])
   validate_place_id();
 
   $rootScope.$on('$locationChangeStart', validate_place_id);
-
 
 })
 
