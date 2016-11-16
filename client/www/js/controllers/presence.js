@@ -1,6 +1,6 @@
 angular.module('presence.controllers', [])
 
-.controller('CheckinController', function($scope, $state, $cordovaGeolocation, nearPlacesService, Checkin, Place) {
+.controller('CheckinController', function($scope, $rootScope, $state, $ionicHistory, $cordovaGeolocation, nearPlacesService, Checkin, Place) {
   var place_id = $state.params.place_id;
 
   var payload = {
@@ -16,6 +16,7 @@ angular.module('presence.controllers', [])
     $scope.checkin = checkin;
 
     localStorage.setItem("current_place_id",checkin.place);
+    localStorage.setItem("current_session_id",checkin.session);
 
     // console.log(Place);
 
@@ -27,19 +28,26 @@ angular.module('presence.controllers', [])
       // return null;
     });
 
+    $ionicHistory.nextViewOptions({
+      disableAnimate: true,
+      disableBack: true
+    });
+
     // $state.go('app.options');
   });
 
 })
 
-.controller('CheckoutController', function($scope, $state, $cordovaGeolocation, nearPlacesService, Checkout) {
+.controller('CheckoutController', function($scope, $rootScope, $state, $ionicHistory, $cordovaGeolocation, nearPlacesService, Checkout) {
   var place_id = $state.params.place_id;
+  var session_id = localStorage.getItem("current_session_id");
 
   var payload = {
     "type": "Checkout",
     "id": null,
     "user": "1",
-    "place": place_id
+    "place": place_id,
+    "session": session_id
   };
 
   Checkout.create(payload).then(function(checkout){
@@ -51,8 +59,13 @@ angular.module('presence.controllers', [])
       console.log("removing localstorage.current_place_id");
       localStorage.removeItem("current_place_id");
       localStorage.removeItem("current_place");
+
+      $ionicHistory.nextViewOptions({
+        disableAnimate: true,
+        disableBack: true
+      });
+
       // $state.go('app.options');
-      
     }
 
   });

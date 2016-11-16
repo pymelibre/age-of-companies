@@ -31,7 +31,7 @@ angular.module('products.controllers', [])
     }
   }
 
-  Provision.findAll({ local: $rootScope.place_id }, { useFilter: true, bypassCache: true}).then(function (provisions) {
+  Provision.findAll({ local: $rootScope.current_place.code }, { useFilter: true, bypassCache: true}).then(function (provisions) {
     console.log("Provisions");
     console.log(provisions);
     $scope.provisions = provisions;
@@ -69,8 +69,8 @@ angular.module('products.controllers', [])
       var pi_index = findWithAttr(filtered, "id", pi.product_instance);
 
       if(pi_index!=-1){
-        pi.local = $rootScope.place_id;
-        pi.provision = 2;
+        pi.local = $rootScope.current_place.code;
+        pi.provision = $scope.provision.id;
 
         PriceData.create(pi).then(function(pricedata){
           // delete(products[index]);
@@ -94,8 +94,8 @@ angular.module('products.controllers', [])
       var pi_index = findWithAttr(filtered, "id", pi.product_instance);
 
       if(pi_index!=-1){
-        pi.local = $rootScope.place_id;
-        pi.provision = 2;
+        pi.local = $rootScope.current_place.code;
+        pi.provision = $scope.provision.id;
 
         PresenceData.create(pi).then(function(presencedata){
           // delete(products[index]);
@@ -119,8 +119,8 @@ angular.module('products.controllers', [])
       var pi_index = findWithAttr(filtered, "id", pi.product_instance);
 
       if(pi_index!=-1){
-        pi.local = $rootScope.place_id;
-        pi.provision = 2;
+        pi.local = $rootScope.current_place.code;
+        pi.provision = $scope.provision.id;
 
         ShareData.create(pi).then(function(sharedata){
           // delete(products[index]);
