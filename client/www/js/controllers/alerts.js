@@ -1,6 +1,6 @@
 angular.module('alerts.controllers', [])
 
-.controller('AlertsController', function($scope, ionicToast, AlertType, Alert) {
+.controller('AlertsController', function($scope, $rootScope, ionicToast, AlertType, Alert) {
 
   $scope.master = {};
 
@@ -18,12 +18,13 @@ angular.module('alerts.controllers', [])
   //REVISAR PARA ARRIBA
 
   $scope.createAlert = function(alert){
+    var place = angular.fromJson(localStorage.getItem("current_place"));
 
     var payload = {
-      "name":"",
-      "description":alert.message,
-      "alert_type":alert.type,
-      "entity":"1"
+      "name": "",
+      "description": alert.message,
+      "alert_type": alert.type,
+      "entity": place.code
     };
 
     Alert.create(payload).then(function (alert) {
